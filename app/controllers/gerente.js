@@ -276,9 +276,9 @@ exports.editUnidad = (req, res) => {
 exports.updateUnidad = (req, res) =>{
   console.log('PUT /unidad/editar/:id_empleado');
 
-  parms = [req.body.noPlacas,req.body.kmActual,req.body.estatus,req.body.tipo,req.body.noEconomico];
+  parms = [req.body.noPlacas,req.body.kmActual,req.body.uni,req.params.numero_economico];
   console.log(parms);
-  db.query("update unidad set numero_placas=?, kilometraje_actual=?, estatus=?, id_tipo_unidad=? where numero_economico=?;", parms, (err, result) => {
+  db.query("update unidad set numero_placas=?, kilometraje_actual=?, estatus=? where numero_economico=?;", parms, (err, result) => {
       console.log(err);
       console.log(result);
       res.redirect('/ver_unidades');
