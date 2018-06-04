@@ -4,10 +4,10 @@ function buscarCotizacion(form){
 		$.get('/../api/cotizaciones/'+cotizacion, function(data, status){
 			info = `
 					<div class="row">
-						<div class="input-field col s4>
+						<div class="input-field col s4">
 							<input id="cotizacionId" name="personaId" type="text" class="validate color-text-blue" value="${data.id_persona}" readonly style="visibility:hidden" ></input>
 						</div>
-						<div class="input-field col s4>
+						<div class="input-field col s4">
 							<input id="cotizacionId" name="cotizacionId" type="text" class="validate color-text-blue" value="${data.id_cotizacion}" readonly style="visibility:hidden" ></input>
 						</div>
 					</div>
