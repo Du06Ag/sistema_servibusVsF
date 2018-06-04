@@ -133,14 +133,14 @@ html
                         input(type="text" class="validate" id="tipo_pay" name="tipo_pay" value=data.empleado.tipo_pago readonly)
                         label(for="tipo_pay" style="color:blue") Tipo de pago
                       div(class="input-field col s6")
-                        input(id="num_licencia" name="num_licencia" type="text" class="validate" value=data.empleado.numero_licencia pattern="[A-Z]{2}[0-9]{2,9}" maxlenght="30" required)
+                        input(id="num_licencia" name="num_licencia" type="text" class="validate" value=data.empleado.numero_licencia)
                         label(for="num_licencia" style="color:blue") Nuero de licencia
                       div(class="input-field col s6")
-                        input(type="text" class="validate" id="tipo_lic" name="tipo_lic" value=data.empleado.tipo_licencia required)
+                        input(type="text" class="validate" id="tipo_lic" name="tipo_lic" value=data.empleado.tipo_licencia)
                         label(for="tipo_lic" style="color:blue") Tipo de licencia
                       div(class="input-field col s6")
                         i(class="material-icons prefix") date_range
-                        input(type="text" class="datepicker validate" format="yyyy-mm-dd" id="vigencia" name="vigencia" value=data.empleado.vigencia_licencia required)
+                        input(type="text" class="datepicker validate" format="yyyy-mm-dd" id="vigencia" name="vigencia" value=data.empleado.vigencia_licencia)
                         label(for="vigencia" style="color:blue; font-size: 12px") Vigencia de licencia  
                         
                   div(class="row")
