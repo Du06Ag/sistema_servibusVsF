@@ -72,7 +72,7 @@ html
                     input(type="text" class="validate" id="ap_paterno" name="ap_paterno" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="3" maxlength="20")
                     label(for="ap_paterno" style="color:blue") Apellido paterno
                   div(class="input-field col s6")
-                    input(id="ap_materno"  name="ap_materno" type="text" class="validate" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="3" maxlength="20")
+                    input(id="ap_materno"  name="ap_materno" type="text" class="validate" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" maxlength="20")
                     label(for="ap_materno" style="color:blue") Apellido materno
                 div(class="row")
                   div(class="input-field col s6 ")
@@ -107,7 +107,7 @@ html
                   input(class="validate" type="text" name="ciudad_destino" id="ciudad_destino" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="5" maxlength="20" required)
                   label(for="ciudad_destino" style="color:blue") Ciudad de destino
                 div(class="input-field col s6")
-                  input(class="validate" type="text" name="lugar_destino" id="lugar_destino" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="5" maxlength="20" required)
+                  input(class="validate" type="text" name="lugar_destino" id="lugar_destino" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="5" maxlength="60" required)
                   label(for="lugar_destino" style="color:blue") Lugar de destino
               div(class="row")
                 div(class="input-field col s3")
