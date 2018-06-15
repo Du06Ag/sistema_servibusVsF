@@ -61,7 +61,7 @@ $().ready(function (){
 			},
 			password: {
 				required: true,
-				minlength: 6
+				minlength: 4
 			},
 			id_empleado: {
 				required: true
