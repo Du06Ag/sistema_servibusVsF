@@ -64,77 +64,74 @@ html
                   label(for="id_persona") ID persona
                 div(class="row")
                   div(class="input-field col s12")
-                    input(id="nombre" name="nombre" type="text" class="validate color-text-blue" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" maxlenght="40" required)
+                    input(id="nombre" name="nombre" type="text" class="validate color-text-blue" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="3" maxlength="20")
                     label(for="nombre" id="nom_label" style="color:blue") Nombre
               div(id="datos_persona")
                 div(class="row")
                   div(class="input-field col s6")
-                    input(type="text" class="validate" id="ap_paterno" name="ap_paterno" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" maxlenght="40" required)
+                    input(type="text" class="validate" id="ap_paterno" name="ap_paterno" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="3" maxlength="20")
                     label(for="ap_paterno" style="color:blue") Apellido paterno
                   div(class="input-field col s6")
-                    input(id="ap_materno"  name="ap_materno" type="text" class="validate" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" maxlenght="40" required)
+                    input(id="ap_materno"  name="ap_materno" type="text" class="validate" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="3" maxlength="20")
                     label(for="ap_materno" style="color:blue") Apellido materno
                 div(class="row")
                   div(class="input-field col s6 ")
-                    input(name="telefono" id="telefono" type="text" class="validate" pattern="\\d{7,18}" required)
+                    input(name="telefono" id="telefono" type="text" class="validate" pattern="\\d{7,18}" minlength="7" maxlength="15")
                     label(for="telefono" style="color:blue") Telefono
                   div(class="input-field col s6")
-                    input(id="correo" type="email" name="correo" class="validate" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required)
+                    input(id="correo" type="email" name="correo" class="validate" pattern="[a-z0-9._%+-]+@[a-z0-9.-]{5,10}\.[a-z]{2,3}$" maxlength="30")
                     label(for="correo" style="color:blue") Correo Electronico
                 div(class="row")
                   div(class="input-field col s3")
-                    input(id="calle" name="calle" type="text" class="validate" minlength="3" maxlength="30" pattern="^([\\w]+[\\s]*)+$" required)
+                    input(id="calle" name="calle" type="text" class="validate" minlength="3" maxlength="20" pattern="^([\\w]+[\\s]*)+$")
                     label(for="calle" style="color:blue") Calle
                   div(class="input-field col s3")
-                    input(id="num_interior" name="num_interior" type="text" class="validate" minlength="1" maxlength="20" pattern="^([\\w]+[\\/]?[\\.]?[\\s]*)+$" required)
+                    input(id="num_interior" name="num_interior" type="text" class="validate" maxlength="5" pattern="^([S][\\/][N]|[1-9][0-9]{0,4})$")
                     label(for="num_interior" style="color:blue") Numero Interior
                   div(class="input-field col s3")
-                    input(id="colonia" name="colonia" type="text" class="validate" minlength="4" maxlength="30" pattern="^([\\w]+[\\.]?[\\s]*)+$" required)
+                    input(id="colonia" name="colonia" type="text" class="validate" minlength="4" maxlength="20" pattern="^([\\w]+[\\.]?[\\s]*)+$")
                     label(for="colonia" style="color:blue") Colonia
                   div(class="input-field col s3")
-                    input(id="codigo_postal" name="codigo_postal" type="text" class="validate" pattern="[1-9][0-9]{4}" maxlenght="5" required)
+                    input(id="codigo_postal" name="codigo_postal" type="text" class="validate" pattern="[1-9][0-9]{4}" maxlength="5")
                     label(for="codigo_postal" style="color:blue") Codigo Postal
               hr( style="background: #31B404; height:3px")
               div(class="row")
                 div(class="input-field col s6")
-                  input(class="validate" name="ciudad_origen" type="text" id="ciudad_origen" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" maxlenght="40" required)
+                  input(class="validate" name="ciudad_origen" type="text" id="ciudad_origen" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="5" maxlength="20" required)
                   label(for="ciudad_origen" style="color:blue;") Ciudad de origen
                 div(class="input-field col s6")
-                  input(class="validate" type="text" name="lugar_origen" id="lugar_origen" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" maxlenght="40" required)
+                  input(class="validate" type="text" name="lugar_origen" id="lugar_origen" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="5" maxlength="20" required)
                   label(for="lugar_origen" style="color:blue") Lugar de salida
               div(class="row")
                 div(class="input-field col s6")
-                  input(class="validate" type="text" name="ciudad_destino" id="ciudad_destino" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" maxlenght="40" required)
+                  input(class="validate" type="text" name="ciudad_destino" id="ciudad_destino" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="5" maxlength="20" required)
                   label(for="ciudad_destino" style="color:blue") Ciudad de destino
                 div(class="input-field col s6")
-                  input(class="validate" type="text" name="lugar_destino" id="lugar_destino" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" maxlenght="40" required)
+                  input(class="validate" type="text" name="lugar_destino" id="lugar_destino" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="5" maxlength="20" required)
                   label(for="lugar_destino" style="color:blue") Lugar de destino
               div(class="row")
                 div(class="input-field col s3")
                   i(class="material-icons prefix") date_range
-                  input(type="text" class="datepicker validate" name="fecha_salida" id="fecha_salida" required)
+                  input(type="text" class="datepicker validate" name="fecha_salida" id="fecha_salida" required readonly)
                   label(for="fecha_salida" style="color:blue") Fecha salida
                 div(class="input-field col s3")
                   i(class="material-icons prefix") access_time
-                  input(type="text" class="timepicker validate" name="hora_salida" id="hora_salida" required)
+                  input(type="text" class="timepicker validate" name="hora_salida" id="hora_salida" required readonly)
                   label(for="hora_salida" style="color:blue") Hora salida
                 div(class="input-field col s3")
                   i(class="material-icons prefix") date_range
-                  input(type="text" class="datepicker validate" name="fecha_regreso" id="fecha_regreso" required)
+                  input(type="text" class="datepicker validate" name="fecha_regreso" id="fecha_regreso" required readonly)
                   label(for="fecha_regreso" style="color:blue; font-size:14px") Fecha regreso
                 div(class="input-field col s3")
                   i(class="material-icons prefix ") access_time
-                  input(type="text" class="timepicker validate" name="hora_regreso" id="hora_regreso" required)
+                  input(type="text" class="timepicker validate" name="hora_regreso" id="hora_regreso" required readonly)
                   label(for="hora_regreso" style="color:blue") Hora regreso
               div(class="row")
-                div(class="input-field col s6")
+                div(class="input-field col s12")
                   select(name="tipo" class="validate" required)
                     each unidad in data.unidades
                       option(value=unidad.id_tipo_unidad)=unidad.modelo_unidad +' '+unidad.numero_plazas +' plazas'
                   label(for="tipo" style="color:blue") Tipo de unidad
-                div(class="input-field col s6")
-                  input(type="text" id="num_unidades" name="num_unidades" class="validate" pattern="[1-9]{1}" maxlenght="5" required)
-                  label(for="num_unidades" style="color:blue") Num. de unidades
               div(class="row")
                 div(class="input-field col s12")
                  input(type="text" id="itinerario" name="itinerario" class="validate" data-length="150" maxlenght="150" required)
