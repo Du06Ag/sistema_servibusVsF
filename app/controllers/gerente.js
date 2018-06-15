@@ -274,7 +274,7 @@ exports.editUnidad = (req, res) => {
 
 //put updateUnidad
 exports.updateUnidad = (req, res) =>{
-  console.log('PUT /unidad/editar/:id_empleado');
+  console.log('PUT /unidad/editar/:id_unidad', req.params.numero_economico);
 
   parms = [req.body.noPlacas,req.body.kmActual,req.body.uni,req.params.numero_economico];
   console.log(parms);

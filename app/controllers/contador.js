@@ -107,16 +107,35 @@ exports.APIReporteDetalles = (req, res) => {
 
 exports.APIReporteServicio = (req, res) => {
   console.log('GET /APIReporteServicio/:contrato');
-  query="select orden_servicio.id_orden_servicio, concat(empleado.nombre,' ',empleado.ap_paterno,' ',empleado.ap_materno) as operador, agenda.numero_economico, tipo_unidad.kilometraje_mantenimineto, date_format(cotizacion.fecha_salida, '%e-%m-%Y') as fecha_salida, cotizacion.hora_salida, date_format(cotizacion.fecha_regreso, '%e-%m-%Y') as fecha_regreso, datediff(fecha_regreso, fecha_salida) as dias, concat(cotizacion.destino,', ',cotizacion.lugar_destino) as destino, cotizacion.itinerario, concat(persona.nombre,' ',persona.ap_paterno,' ',persona.ap_materno) as responsable, persona.telefono, cotizacion.importe, orden_servicio.kilometros_salida from orden_servicio join contrato on contrato.id_contrato = orden_servicio.id_contrato join cotizacion on cotizacion.id_cotizacion = contrato.id_cotizacion join persona on persona.id_persona = cotizacion.id_persona join agenda on agenda.id_contrato = contrato.id_contrato join unidad on unidad.numero_economico = agenda.numero_economico join tipo_unidad on tipo_unidad.id_tipo_unidad = unidad.id_tipo_unidad join operador on operador.id_operador = agenda.id_operador join empleado on empleado.id_empleado = operador.id_empleado where agenda.estatus='Brindado' and contrato.id_contrato=?";
+  query="select orden_servicio.id_orden_servicio, concat(empleado.nombre,' ',empleado.ap_paterno,' ',empleado.ap_materno) as operador, agenda.numero_economico, tipo_unidad.kilometraje_mantenimineto, date_format(cotizacion.fecha_salida, '%e-%m-%Y') as fecha_salida, cotizacion.hora_salida, date_format(cotizacion.fecha_regreso, '%e-%m-%Y') as fecha_regreso, datediff(fecha_regreso, fecha_salida) as dias, concat(cotizacion.destino,', ',cotizacion.lugar_destino) as destino, cotizacion.itinerario, concat(persona.nombre,' ',persona.ap_paterno,' ',persona.ap_materno) as responsable, persona.telefono, cotizacion.importe, orden_servicio.kilometros_salida from orden_servicio join contrato on contrato.id_contrato = orden_servicio.id_contrato join cotizacion on cotizacion.id_cotizacion = contrato.id_cotizacion join persona on persona.id_persona = cotizacion.id_persona join agenda on agenda.id_contrato = contrato.id_contrato join unidad on unidad.numero_economico = agenda.numero_economico join tipo_unidad on tipo_unidad.id_tipo_unidad = unidad.id_tipo_unidad join operador on operador.id_operador = agenda.id_operador join empleado on empleado.id_empleado = operador.id_empleado where contrato.id_contrato=?";
   data = {}
-  db.query(query,req.params.contrato, (err, rows) => {
-    data['info'] = JSON.parse(JSON.stringify(rows[0]));
-    if (data['info'] == ""){
-      console.log('Error no se encontro el contrato, verifique el folio');
-      res.redirect('/bitacora_manteni');
+  db.query("select count(*) as resp, id_orden_servicio from orden_servicio where id_contrato=?;", req.params.contrato, (err, rows) => {
+    data['res'] = JSON.parse(JSON.stringify(rows[0]));
+    if(data.res.resp == "0"){
+      console.log('Error!! no se encontro ningun contrato con ese folio!!');
+      res.redirect('/reporte_rendimiento');
     }else{
-      res.status(200).json(data);
-      console.log(data);
+      db.query('select count(*) as res from reporte_rendimiento where  id_orden_servicio=?;', data.res.id_orden_servicio, (err, rows) => {
+        data['re'] = JSON.parse(JSON.stringify(rows[0]));
+        if(data.re.res == "1"){
+          console.log('Error!! Ya se genero un reporte con el mismo folio de contrato...');
+          res.redirect('/reporte_rendimiento');
+        }else{
+          db.query("select count(*) as cont from agenda where estatus='Brindado' and id_contrato=?;", req.params.contrato, (err, rows) => {
+            data['co'] = JSON.parse(JSON.stringify(rows[0]));
+            if(data.co.cont == "0"){
+              console.log('Error!! El servico aun no sea brindado...');
+              res.redirect('/reporte_rendimiento');
+            }else{
+              db.query(query,req.params.contrato, (err, rows) => {
+                data['info'] = JSON.parse(JSON.stringify(rows[0]));
+                res.status(200).json(data);
+                console.log(data);
+              });
+            }
+          });
+        }
+      });
     }
   });
 }

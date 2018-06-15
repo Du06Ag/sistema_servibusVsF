@@ -50,8 +50,8 @@ exports.registrar_coti = (req, res) => {
             console.log('error al insertar cotizacion ' + err);
           }else{
             console.log('inserto cotizacion su id: ' + rows.insertId);
-            console.log(rows.insertId + ' ' + req.body.tipo + ' ' + req.body.num_unidades);
-            db.query("insert into cotizacion_tipounidad (id_cotizacion, id_tipo_unidad, numero_unidades) values ("+rows.insertId+","+req.body.tipo+","+req.body.num_unidades+");", function(err, rows){
+            console.log(rows.insertId + ' ' + req.body.tipo);
+            db.query("insert into cotizacion_tipounidad (id_cotizacion, id_tipo_unidad, numero_unidades) values ("+rows.insertId+","+req.body.tipo+",1);", function(err, rows){
               if(err){
                 console.log('error al insertar cotizacion_tipounidad ' + err);
               }else{
@@ -72,8 +72,8 @@ exports.registrar_coti = (req, res) => {
         console.log('error al insertar cotizacion ' + err);
       }else{
         console.log('inserto cotizacion su id: ' + rows.insertId);
-        console.log(rows.insertId + ' ' + req.body.tipo + ' ' + req.body.num_unidades);
-        db.query("insert into cotizacion_tipounidad (id_cotizacion, id_tipo_unidad, numero_unidades) values ("+rows.insertId+","+req.body.tipo+","+req.body.num_unidades+");", function(err, rows){
+        console.log(rows.insertId + ' ' + req.body.tipo );
+        db.query("insert into cotizacion_tipounidad (id_cotizacion, id_tipo_unidad, numero_unidades) values ("+rows.insertId+","+req.body.tipo+",1);", function(err, rows){
           if(err){
             console.log('error al insertar cotizacion_tipounidad ' + err);
           }else{

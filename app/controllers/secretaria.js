@@ -37,16 +37,33 @@ exports.APICotizacionInfo = (req, res) => {
   console.log('GET /api/APICotizacionInfo/:cotizacion');
   console.log(req.params.cotizacion);
   data ={}
-  db.query("select importe from cotizacion where id_cotizacion=?;",[req.params.cotizacion], (err, rows) => {
-    data['importe'] = JSON.parse(JSON.stringify(rows[0]));
-    if(data.importe.importe == ""){
-      console.log('no se puede generar el contrato sin a ver puesto el importe de la misma');
+  db.query("select count(*) as row from contrato where id_cotizacion=?;",[req.params.cotizacion], (err, rows) => {
+    data['coti'] = JSON.parse(JSON.stringify(rows[0]));
+    if(data.coti.row =="1"){
+      console.log('Error!! ya se genero un contrato con el mismo numero de cotizacion..');
+      //req.flash('danger','Error!! ya se genero un contrato con el mismo numero de cotizacion..');
       res.redirect('/generar_contrato');
     }else{
-      db.query("select concat(persona.nombre,' ',persona.ap_paterno,' ',persona.ap_materno)as nombre, persona.estatus, persona.id_persona, cotizacion.id_cotizacion, concat(cotizacion.destino,', ',cotizacion.lugar_destino) as destino, date_format(fecha_salida, '%e-%m-%Y') as fecha_salida, concat(cotizacion.origen,', ',cotizacion.lugar_salida) as origen, cotizacion.hora_salida, cotizacion.itinerario, date_format(fecha_regreso, '%e-%m-%Y') as fecha_regreso, cotizacion.hora_regreso, cotizacion.importe,cotizacion_tipounidad.id_tipo_unidad,cotizacion_tipounidad.numero_unidades, concat(tipo_unidad.marca_unidad,' ',tipo_unidad.modelo_unidad,' ',tipo_unidad.numero_plazas) as modelo from cotizacion inner join persona on persona.id_persona =cotizacion.id_persona inner join cotizacion_tipounidad on cotizacion_tipounidad.id_cotizacion = cotizacion.id_cotizacion inner join tipo_unidad on tipo_unidad.id_tipo_unidad = cotizacion_tipounidad.id_tipo_unidad where cotizacion.id_cotizacion=?;", [req.params.cotizacion], (err, rows) => {
-        var cotiza =JSON.parse(JSON.stringify(rows));
-        res.status(200).json(cotiza[0]);
-        console.log(cotiza[0]);
+      db.query("select count(*) as coti from cotizacion where id_cotizacion=?",[req.params.cotizacion], (err, rows) => {
+        data['resul'] = JSON.parse(JSON.stringify(rows[0]));
+        if(data.resul.coti == "0"){
+          console.log('Error!! el numero de cotizacion no existe!!');
+          res.redirect('/generar_contrato');
+        }else{
+          db.query("select importe from cotizacion where id_cotizacion=?;",[req.params.cotizacion], (err, rows) => {
+            data['importe'] = JSON.parse(JSON.stringify(rows[0]));
+            if(data.importe.importe == ""){
+              console.log('no se puede generar el contrato sin a ver puesto el importe de la misma');
+              res.redirect('/generar_contrato');
+            }else{
+              db.query("select concat(persona.nombre,' ',persona.ap_paterno,' ',persona.ap_materno)as nombre, persona.estatus, persona.id_persona, cotizacion.id_cotizacion, concat(cotizacion.destino,', ',cotizacion.lugar_destino) as destino, date_format(fecha_salida, '%e-%m-%Y') as fecha_salida, concat(cotizacion.origen,', ',cotizacion.lugar_salida) as origen, cotizacion.hora_salida, cotizacion.itinerario, date_format(fecha_regreso, '%e-%m-%Y') as fecha_regreso, cotizacion.hora_regreso, cotizacion.importe,cotizacion_tipounidad.id_tipo_unidad,cotizacion_tipounidad.numero_unidades, concat(tipo_unidad.marca_unidad,' ',tipo_unidad.modelo_unidad,' ',tipo_unidad.numero_plazas) as modelo from cotizacion inner join persona on persona.id_persona =cotizacion.id_persona inner join cotizacion_tipounidad on cotizacion_tipounidad.id_cotizacion = cotizacion.id_cotizacion inner join tipo_unidad on tipo_unidad.id_tipo_unidad = cotizacion_tipounidad.id_tipo_unidad where cotizacion.id_cotizacion=?;",[req.params.cotizacion], (err, rows) => {
+                var cotiza =JSON.parse(JSON.stringify(rows));
+                res.status(200).json(cotiza[0]);
+                console.log(cotiza[0]);
+              });
+            }
+          });
+        }
       });
     }
   });
@@ -168,34 +185,50 @@ exports.contratoPDF = (req, res) => {
 exports.APIContratoInfo = (req, res) =>{
   console.log('GET /api/APIContratoInfo/:contrato', req.params.contrato);
   data ={}
-  db.query("select contrato.id_contrato, contrato.estatus, contrato.importe_restante, contrato.anticipo_numero, concat(persona.nombre,' ',persona.ap_paterno,' ',persona.ap_materno)as nombre, cotizacion.destino, date_format(cotizacion.fecha_salida, '%e-%m-%Y') as fecha_salida, concat(cotizacion.origen,', ',cotizacion.lugar_salida)as salida, date_format(cotizacion.fecha_regreso, '%e-%m-%Y') as fecha_regreso, cotizacion.hora_salida, cotizacion.hora_regreso, cotizacion.importe, cotizacion.id_cotizacion from contrato inner join cotizacion on cotizacion.id_cotizacion = contrato.id_cotizacion inner join persona on persona.id_persona = cotizacion.id_persona where contrato.id_contrato=?;", req.params.contrato, (err, rows) => {
-      data['info'] = JSON.parse(JSON.stringify(rows[0]));
-      if(data.info.nombre ==""){
-        console.log('Error no se encontro el contrato, verifique el folio');
-        res.redirect('/agendar_servicio');
-      }else{
-        db.query("select contrato.id_contrato, contrato.estado,cotizacion_tipounidad.id_cotizacion, cotizacion_tipounidad.id_tipo_unidad,cotizacion_tipounidad.numero_unidades, concat(tipo_unidad.marca_unidad,' ',tipo_unidad.modelo_unidad)as tipo, tipo_unidad.numero_plazas from contrato inner join cotizacion on cotizacion.id_cotizacion = contrato.id_cotizacion inner join cotizacion_tipounidad on cotizacion_tipounidad.id_cotizacion = cotizacion.id_cotizacion inner join tipo_unidad on tipo_unidad.id_tipo_unidad = cotizacion_tipounidad.id_tipo_unidad where contrato.id_contrato=?;", req.params.contrato, (err, rows) => {
-          data['unidades'] = JSON.parse(JSON.stringify(rows[0]));
-          if(err){
-            console.log(err);
+  db.query("select count(*) as con from contrato where estado='Sin agendar' and id_contrato=?;", req.params.contrato, (err, rows) =>{
+    data['cont']=JSON.parse(JSON.stringify(rows[0]));
+    if(data.cont.con =="0"){
+      console.log("Error el contrato ya se encuentra agendado..");
+      res.redirect('/agendar_servicio');
+    }else{
+      db.query("select contrato.id_contrato, contrato.estatus, contrato.importe_restante, contrato.anticipo_numero, concat(persona.nombre,' ',persona.ap_paterno,' ',persona.ap_materno)as nombre, cotizacion.destino, date_format(cotizacion.fecha_salida, '%e-%m-%Y') as fecha_salida, concat(cotizacion.origen,', ',cotizacion.lugar_salida)as salida, date_format(cotizacion.fecha_regreso, '%e-%m-%Y') as fecha_regreso, cotizacion.hora_salida, cotizacion.hora_regreso, cotizacion.importe, cotizacion.id_cotizacion from contrato inner join cotizacion on cotizacion.id_cotizacion = contrato.id_cotizacion inner join persona on persona.id_persona = cotizacion.id_persona where contrato.id_contrato=?;", req.params.contrato, (err, rows) => {
+          data['info'] = JSON.parse(JSON.stringify(rows[0]));
+          if(data.info.nombre ==""){
+            console.log('Error!! El servico ya se encuentra agendado...');
+            res.redirect('/agendar_servicio');
           }else{
-            res.status(200).json(data);
-            console.log(data);
+            db.query("select contrato.id_contrato, contrato.estado,cotizacion_tipounidad.id_cotizacion, cotizacion_tipounidad.id_tipo_unidad,cotizacion_tipounidad.numero_unidades, concat(tipo_unidad.marca_unidad,' ',tipo_unidad.modelo_unidad)as tipo, tipo_unidad.numero_plazas from contrato inner join cotizacion on cotizacion.id_cotizacion = contrato.id_cotizacion inner join cotizacion_tipounidad on cotizacion_tipounidad.id_cotizacion = cotizacion.id_cotizacion inner join tipo_unidad on tipo_unidad.id_tipo_unidad = cotizacion_tipounidad.id_tipo_unidad where contrato.id_contrato=?;", req.params.contrato, (err, rows) => {
+              data['unidades'] = JSON.parse(JSON.stringify(rows[0]));
+              if(err){
+                console.log(err);
+              }else{
+                res.status(200).json(data);
+                console.log(data);
+              }
+            });
           }
-        });
-      }
+      });
+    }
   });
 }
 
 exports.APIContratoUni = (req, res) => {
   console.log('GET /api/APIContratoUni:CONTRATO', req.params.contrato);
-  db.query("select contrato.id_contrato, contrato.estado,cotizacion_tipounidad.id_cotizacion, cotizacion_tipounidad.id_tipo_unidad,cotizacion_tipounidad.numero_unidades, concat(tipo_unidad.marca_unidad,' ',tipo_unidad.modelo_unidad)as tipo, tipo_unidad.numero_plazas from contrato inner join cotizacion on cotizacion.id_cotizacion = contrato.id_cotizacion inner join cotizacion_tipounidad on cotizacion_tipounidad.id_cotizacion = cotizacion.id_cotizacion inner join tipo_unidad on tipo_unidad.id_tipo_unidad = cotizacion_tipounidad.id_tipo_unidad where contrato.id_contrato=?;", req.params.contrato, (err, rows) => {
-    var unidades = JSON.parse(JSON.stringify(rows));
-    if(err){
-      console.log(err);
+  data={}
+  db.query("select count(*) as con from contrato where estado='Sin agendar' and id_contrato=?", req.params.contrato, (err, rows) => {
+    data['cont']=JSON.parse(JSON.stringify(rows[0]));
+    if(data.cont.con == "0"){
+      console.log('Error!! El servico ya se encuentra agendado...');
     }else{
-      res.status(200).json(unidades);
-      console.log(data);
+      db.query("select contrato.id_contrato, contrato.estado,cotizacion_tipounidad.id_cotizacion, cotizacion_tipounidad.id_tipo_unidad,cotizacion_tipounidad.numero_unidades, concat(tipo_unidad.marca_unidad,' ',tipo_unidad.modelo_unidad)as tipo, tipo_unidad.numero_plazas from contrato inner join cotizacion on cotizacion.id_cotizacion = contrato.id_cotizacion inner join cotizacion_tipounidad on cotizacion_tipounidad.id_cotizacion = cotizacion.id_cotizacion inner join tipo_unidad on tipo_unidad.id_tipo_unidad = cotizacion_tipounidad.id_tipo_unidad where contrato.id_contrato=?;", req.params.contrato, (err, rows) => {
+        var unidades = JSON.parse(JSON.stringify(rows));
+        if(err){
+          console.log(err);
+        }else{
+          res.status(200).json(unidades);
+          console.log(data);
+        }
+      });
     }
   });
 }
@@ -522,15 +555,27 @@ exports.APIFindContrato = (req, res) =>{
   console.log('GET /api/APIFindContrato/:contrato', req.params.contrato);
   query="select cotizacion.id_cotizacion as cotizacion, concat(cotizacion.destino,', ',cotizacion.lugar_destino) as destino, concat(cotizacion.origen,', ', cotizacion.lugar_salida) as salida, cotizacion.hora_salida, cotizacion.hora_regreso, concat(persona.nombre,' ',persona.ap_paterno,' ',persona.ap_materno) as nombre, contrato.id_contrato as contrato, agenda.id_agenda as agenda, agenda.estatus, unidad.numero_economico,unidad.numero_placas as placas, tipo_unidad.id_tipo_unidad, concat(tipo_unidad.marca_unidad,' ',tipo_unidad.modelo_unidad) as tipo, tipo_unidad.marca_unidad as marca, tipo_unidad.modelo_unidad as modelo, operador.id_operador, empleado.id_empleado, concat(empleado.nombre,' ',empleado.ap_paterno,' ',empleado.ap_materno) as operador, operador.numero_licencia, operador.tipo_licencia, operador.vigencia_licencia from agenda join contrato on contrato.id_contrato = agenda.id_contrato join cotizacion on cotizacion.id_cotizacion = contrato.id_cotizacion join persona on persona.id_persona = cotizacion.id_persona join unidad on unidad.numero_economico = agenda.numero_economico join tipo_unidad on tipo_unidad.id_tipo_unidad = unidad.id_tipo_unidad join operador on operador.id_operador = agenda.id_operador join empleado on empleado.id_empleado = operador.id_empleado where contrato.id_contrato=?;";
   data ={}
-  db.query(query, req.params.contrato, (err, rows) => {
-      data['info'] = JSON.parse(JSON.stringify(rows[0]));
-      if(data['info'] == " "){
-        console.log('Error no se encontro el contrato, verifique el folio');
-        res.redirect('/generar_bitacora');
-      }else{
-        res.status(200).json(data);
-        console.log(data);
-      }
+  db.query("select count(*) as agenda from agenda where estatus='Proximo' and id_contrato=?;", req.params.contrato, (err, rows) => {
+    data['age']= JSON.parse(JSON.stringify(rows[0]));
+    if(data.age.agenda == "0"){
+      console.log('Error!! No se puede generar la bitacora sin antes a ver agendado el Servicio!!');
+      res.redirect('/generar_bitacora');
+    }else{
+      db.query("select count(*) as bita from bitacora where id_contrato=?;", req.params.contrato, (err, rows) => {
+        data['bit']= JSON.parse(JSON.stringify(rows[0]));
+        if(data.bit.bita == "1"){
+          console.log('Error!!! Ya se ah generador una bitacora de viaje con el mismo No. de contrato');
+          res.redirect('/generar_bitacora');
+        }else{
+          db.query(query, req.params.contrato, (err, rows) => {
+            data['info'] = JSON.parse(JSON.stringify(rows[0]));
+            res.status(200).json(data);
+            console.log('Success!');
+            console.log(data);
+          });
+        }
+      });
+    }
   });
 }
 
@@ -580,15 +625,27 @@ exports.APIOrdenContrato = (req, res) =>{
   console.log('GET /api/APIOrdenContrato/:contrato', req.params.contrato);
   query="select contrato.id_contrato as contrato, concat(persona.nombre,' ',persona.ap_paterno,' ',persona.ap_materno) as nombre, persona.telefono, date_format(cotizacion.fecha_salida, '%e-%m-%Y') as fecha_salida, concat(cotizacion.origen,', ', cotizacion.lugar_salida) as salida, cotizacion.hora_salida, date_format(cotizacion.fecha_regreso, '%e-%m-%Y') as fecha_regreso, cotizacion.hora_regreso, concat(cotizacion.destino,', ',cotizacion.lugar_destino) as destino, cotizacion.itinerario, concat(empleado.nombre,' ',empleado.ap_paterno,' ',empleado.ap_materno) as operador, unidad.kilometraje_actual, unidad.numero_economico from contrato join cotizacion on cotizacion.id_cotizacion = contrato.id_cotizacion join persona on persona.id_persona = cotizacion.id_persona join agenda on agenda.id_contrato = contrato.id_contrato join unidad on unidad.numero_economico = agenda.numero_economico join tipo_unidad on tipo_unidad.id_tipo_unidad = unidad.id_tipo_unidad join operador on operador.id_operador = agenda.id_operador join empleado on empleado.id_empleado = operador.id_empleado where contrato.id_contrato=?;";
   data ={}
-  db.query(query, req.params.contrato, (err, rows) => {
-      data['info'] = JSON.parse(JSON.stringify(rows[0]));
-      if(data['info'] == " "){
-        console.log('Error no se encontro el contrato, verifique el folio');
-        res.redirect('/generar_orden');
-      }else{
-        res.status(200).json(data);
-        console.log(data);
-      }
+  db.query("select count(*) as agen from agenda where estatus='Proximo' and id_contrato=?;", req.params.contrato, (err, rows) => {
+    data['agend']=JSON.parse(JSON.stringify(rows[0]));
+    if(data.agend.agen =="0"){
+      console.log("Error!! verifique que el numero de contrato es correcto..");
+      res.redirect('/generar_orden');
+    }else{
+      db.query("select count(*) as ord from orden_servicio where id_contrato=?;", req.params.contrato, (err, rows) => {
+        data['orde']=JSON.parse(JSON.stringify(rows[0]));
+        if(data.orde.ord == "1") {
+          console.log("Error! Ya se aregistrado una orden de servicio con el mismo No. de contrato...");
+          res.redirect('/generar_orden');
+        }else{
+          db.query(query, req.params.contrato, (err, rows) => {
+            data['info'] = JSON.parse(JSON.stringify(rows[0]));
+            res.status(200).json(data);
+            console.log('Success');
+            console.log(data);
+          });
+        }
+      });
+    }
   });
 }
 
