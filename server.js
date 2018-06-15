@@ -1,6 +1,6 @@
 const express = require ('express'),
       app     = express(),
-      port    = process.env.PORT || 3001,
+      port    = process.env.PORT || 3000,
       passport     = require('passport'),
       multer  = require('multer'),
       flash   = require('connect-flash'),
@@ -29,7 +29,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // requieridos por passport
-app.use(session({ secret: 'ppcdsalvc' })); // session secret
+app.use(session({ secret: 'ppcdsalvc', resave: true, saveUninitialized:true })); // session secret
+app.use(require('connect-flash')());
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
 app.use(passport.initialize()); // persistent login sessions
 app.use(passport.session());
 app.use(function(req,res,next){
