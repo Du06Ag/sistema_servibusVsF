@@ -122,14 +122,14 @@ html
                         input(type="text" class="validate" id="tipo_pay" name="tipo_pay" value="Comision" readonly )
                         label(for="tipo_pay" style="color:blue") Tipo de pago
                       div(class="input-field col s6")
-                        input(id="num_licencia" name="num_licencia" type="text" class="validate" )
+                        input(id="num_licencia" name="num_licencia" type="text" class="validate" pattern="[A-Z]{2}[0-9]{2,9}" maxlenght="30" required)
                         label(for="num_licencia" style="color:blue") Numero de licencia
                       div(class="input-field col s6")
-                        input(type="text" class="validate" id="tipo_lic" name="tipo_lic" )
+                        input(type="text" class="validate" id="tipo_lic" name="tipo_lic" required)
                         label(for="tipo_lic" style="color:blue") Tipo de licencia
                       div(class="input-field col s6")
                         i(class="material-icons prefix") date_range
-                        input(type="text" class="datepicker validate" format="yyyy-mm-dd" id="vigencia" name="vigencia" )
+                        input(type="text" class="datepicker validate" format="yyyy-mm-dd" id="vigencia" name="vigencia" class="validate" required)
                         label(for="vigencia" style="color:blue; font-size: 12px") Vigencia de licencia  
                       
                   div(class="row")
