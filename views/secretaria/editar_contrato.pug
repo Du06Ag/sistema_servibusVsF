@@ -114,17 +114,17 @@ html
                     label(for="lugarSalida" style="color:blue") Lugar de regreso
                 div(class="row")
                   div(class="input-field col s10 push-s1 pull-s1")
-                    input(id="adelanto" name="adelanto" type="text" class="validate color-text-blue" required value=data.contrato.anticipo_letra)
+                    input(id="adelanto" name="adelanto" type="text" class="validate color-text-blue" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="8" maxlength="95" required value=data.contrato.anticipo_letra)
                     label(for="adelanto" style="color:blue") Cantidad de adelanto
                 div(class="row")
                   div(class="input-field col s3 push-s1")
                     input(type="text" class="validate" id="total" value=data.contrato.importe readonly)
                     label(for="total" style="color:blue") Precio total $
                   div(class="input-field col s4 push-s1 pull-s1")
-                    input(id="anticipo" name="anticipo" type="text" class="validate color-text-blue" onblur="findTotal()" required value=data.contrato.anticipo_numero)
+                    input(id="anticipo" name="anticipo" type="text" class="validate color-text-blue" pattern="[1-9][0-9]*" minlength="4" maxlength="5" onblur="findTotal()" required value=data.contrato.anticipo_numero)
                     label(for="anticipo" style="color:blue") Anticipo $
                   div(class="input-field col s3 push-s1")
-                    input(type="text" class="validate" id="saldo" name="saldo" value=data.contrato.importe_restante)
+                    input(type="text" class="validate" id="saldo" name="saldo" value=data.contrato.importe_restante readonly)
                     label(for="Saldo" style="color:blue") Saldo $
               div(class="row")
                 div(class="col s12")
