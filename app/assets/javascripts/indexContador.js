@@ -31,7 +31,7 @@ function findContrato(form){
               <label class="active" for="fecha_regreso" style="color:blue; font-size:14px"> Fecha de llegada</label>
             </div>
             <div class="input-field col s3">
-              <input type="text" class="validate" id="numDias" name="numDias" value="${data.info.dias}" ></input>
+              <input type="text" class="validate" id="numDias" name="numDias" value="${data.info.dias}" readonly></input>
               <label for="numDias" style="color:blue" class="active">Numero de dias</label>
             </div>
           </div>
@@ -65,7 +65,7 @@ function findContrato(form){
               <label class="active" for="kmSalida" style="color:blue"> Km Salida</label>
             </div>
             <div class="input-field col s4">
-              <input id="kmLLegada" name="kmLLegada" type="text" onblur="kilometraje()" class="validate color-text-blue" pattern="[0-9][0-9]*+[\\.]?[0-9]{1,2}" maxlenght="11" required></input>
+              <input id="kmLLegada" name="kmLLegada" type="text" onblur="kilometraje()" class="validate color-text-blue" pattern="[1-9][0-9]*([\\.][0-9]{2})?" minlength="1" maxlength="8" required></input>
               <label for="kmLLegada" style="color:blue"> Km Llegada</label>
             </div>
             <div class="input-field col s4">
@@ -75,11 +75,11 @@ function findContrato(form){
           </div>
           <div class="row">
             <div class="input-field col s4">
-              <input id="combustibleLts" name="combustibleLts" type="text" onblur="rendimientoCombustible()" class="validate color-text-blue" pattern="[0-9][0-9]*+[\\.]?[0-9]{1,2}" maxlenght="11" required></input>
+              <input id="combustibleLts" name="combustibleLts" type="text" onblur="rendimientoCombustible()" class="validate color-text-blue" pattern="[1-9][0-9]*([\\.][0-9]{2})?" minlength="3" maxlength="8" required></input>
               <label for="combustibleLts" style="color:blue"> Combustible Lts.</label>
             </div>
             <div class="input-field col s4">
-              <input id="combustiblePre" name="combustiblePre" type="text" class="validate color-text-blue" pattern="[0-9][0-9]*+[\\.]?[0-9]{1,2}" maxlenght="11" required></input>
+              <input id="combustiblePre" name="combustiblePre" type="text" class="validate color-text-blue" pattern="[1-9][0-9]*([\\.][0-9]{2})?" minlength="3" maxlength="8" required></input>
               <label for="combustiblePre" style="color:blue"> Total de combustible $</label>
             </div>
             <div class="input-field col s4">
@@ -89,11 +89,11 @@ function findContrato(form){
           </div>
           <div class="row">
             <div class="input-field col s4">
-              <input id="gastos_operador" name="gastos_operador" type="text" class="validate color-text-blue" pattern="[0-9][0-9]*+[\\.]?[0-9]{1,2}" maxlenght="11" required></input>
+              <input id="gastos_operador" name="gastos_operador" type="text" class="validate color-text-blue" pattern="[1-9][0-9]*([\\.][0-9]{2})?" minlength="3" maxlength="8" required></input>
               <label for="gastos_operador" style="color:blue"> Importe de gastos al operador $</label>
             </div>
             <div class="input-field col s4">
-              <input id="tipoPago" type="text" class="validate color-text-blue" onblur="operadorPago()" value="13" required></input>
+              <input id="tipoPago" type="text" class="validate color-text-blue" onblur="operadorPago()" value="13" readonly></input>
               <label for="tipoPago" style="color:blue" class="active">  % de pago al Operador</label>
             </div>
             <div class="input-field col s4">
@@ -103,11 +103,11 @@ function findContrato(form){
           </div>
           <div class="row">
             <div class="input-field col s4">
-              <input id="casetas" name="casetas" type="text" class="validate color-text-blue" pattern="[0-9][0-9]*+[\\.]?[0-9]{1,2}" maxlenght="11" required></input>
+              <input id="casetas" name="casetas" type="text" class="validate color-text-blue" pattern="[1-9][0-9]*([\\.][0-9]{2})?" minlength="3" maxlength="8" required></input>
               <label for="casetas" style="color:blue"> Pago de casetas $</label>
             </div>
             <div class="input-field col s4">
-              <input id="gastosEx" name="gastosEx" type="text" onblur="totaldegastos()" class="validate color-text-blue" pattern="[0-9][0-9]*+[\\.]?[0-9]{1,2}" maxlenght="11" required></input>
+              <input id="gastosEx" name="gastosEx" type="text" onblur="totaldegastos()" class="validate color-text-blue" pattern="[0-9]*([\\.][0-9]{2})?" minlength="1" maxlength="8" required></input>
               <label for="gastosEx" style="color:blue"> Gastos extra $</label>
             </div>
             <div class="input-field col s4">

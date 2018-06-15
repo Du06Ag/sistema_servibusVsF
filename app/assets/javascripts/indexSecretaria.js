@@ -2,10 +2,10 @@ function buscarCotizacion(form){
 	cotizacion = form.cotizacion.value || "";
 	if(cotizacion != ""){
 		$.get('/../api/cotizaciones/'+cotizacion, function(data, status){
-			info = `
+			info = `﻿
 					<div class="row">
 						<div class="input-field col s4">
-							<input id="cotizacionId" name="personaId" type="text" class="validate color-text-blue" value="${data.id_persona}" readonly style="visibility:hidden" ></input>
+							<input id="personaId" name="personaId" type="text" class="validate color-text-blue" value="${data.id_persona}" readonly style="visibility:hidden" ></input>
 						</div>
 						<div class="input-field col s4">
 							<input id="cotizacionId" name="cotizacionId" type="text" class="validate color-text-blue" value="${data.id_cotizacion}" readonly style="visibility:hidden" ></input>
@@ -55,7 +55,7 @@ function buscarCotizacion(form){
 					</div>
 					<div class="row">
 					  <div class="input-field col s10 push-s1 pull-s1">
-							<input id="adelanto" name="adelanto" type="text" class="validate color-text-blue" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$+[\\.]?" maxlenght="45" required></input>
+							<input id="adelanto" name="adelanto" type="text" class="validate color-text-blue" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="8" maxlength="95" required></input>
 							<label for="adelanto" style="color:blue"> Cantidad de adelanto </label>
 						</div>
 					</div>
@@ -65,7 +65,7 @@ function buscarCotizacion(form){
 							<label class="active" for="total" style="color:blue"> Precio total $ </label>
 						</div>
 						<div class="input-field col s4 push-s1 pull-s1">
-							<input id="anticipo" name="anticipo" type="text" onblur="findTotal()" class="validate color-text-blue" pattern="[0-9][0-9]*+[\\.]?[0-9]{1,2}" maxlenght="11" required></input>
+							<input id="anticipo" name="anticipo" type="text" onblur="findTotal()" class="validate color-text-blue" pattern="[1-9][0-9]*" minlength="4" maxlenght="5" required></input>
 							<label for="anticipo" style="color:blue"> Anticipo $ </label>
 						</div>
 						<div class="input-field col s3 push-s1">
@@ -180,7 +180,7 @@ function buscarContrato(form){
 				innerHTML+=				'</a>';
 				innerHTML+=			'</div>';
 				innerHTML+=			'<div class="input-field col s12 m12 l7 push-l2">';
-				innerHTML+=			  '<input type="text" id="unid" name="unid" style="text-align:center;" class="validate color-text-blue" required></input>';
+				innerHTML+=			  '<input type="text" id="unid" name="unid" style="text-align:center;" class="validate color-text-blue" required readonly></input>';
 				innerHTML+=			'</div>';
 				innerHTML+=		'</div>';
 				innerHTML+=	'</td>'
@@ -192,7 +192,7 @@ function buscarContrato(form){
 				innerHTML+=				'</a>';
 				innerHTML+=			'</div>';
 				innerHTML+=			'<div class="input-field col s12 m12 l7 push-l2">'
-				innerHTML+=				'<input type="text" id="opera" name="opera" style="text-align:center;" class="validate color-text-blue" required></input>';
+				innerHTML+=				'<input type="text" id="opera" name="opera" style="text-align:center;" class="validate color-text-blue" readonly required></input>';
 				innerHTML+=			'</div>';
 				innerHTML+=		'</div>';
 				innerHTML+=	'</td>';
@@ -374,7 +374,7 @@ function findOrdenContrato(form){
 					</div>
 					<div class="row">
 						<div class="input-field col s3 push-s1 pull-s1">
-							<input id="kmsalida" name="kmsalida" type="text" class="validate color-text-blue" value="${data.info.kilometraje_actual}" pattern="[0-9][0-9]*+[\\.]?[0-9]{1,2}" maxlenght="11" required></input>
+							<input id="kmsalida" name="kmsalida" type="text" class="validate color-text-blue" value="${data.info.kilometraje_actual}" pattern="[1-9][0-9]*" minlength="1" maxlength="8" required></input>
 							<label class="active" for="destino" style="color:blue"> Km. de salida	</label>
 						</div>
 						<div class="input-field col s7 push-s1">

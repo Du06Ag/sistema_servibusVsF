@@ -76,8 +76,9 @@ function seleccionarPersona(id_persona,nombre,paterno,materno){
 
 function getcorreo(form){
 	email = form.correo_persona.value;
-  persona="";
+
 	$.get('/../api/persona/buscar/correo/'+email, function(data, status){
+    persona="";
         persona = `<li>
               <div class="collapsible-header">
                 <i class="material-icons left">
@@ -89,14 +90,14 @@ function getcorreo(form){
                 </i>
               </div>
             </li>`;
-    //alert("data => "+data);
-    if(persona == ""){
-      $('#persona_correo').html("<p class='red-text center'> No se encontraron resultados, ingrese correctamente su correo electronico....</p>")
-    }else{
-      $('#persona_correo').html(persona);
-    }
-  });
+        //alert("data => "+data);
+        if(persona != " "){
+          $('#persona_correo').html(persona);
 
+        }else{
+          $('#persona_correo').html("<p class='red-text center'> No se encontraron resultados, ingrese correctamente su correo electronico....</p>");
+        }
+  });
   return false;
 }
 
