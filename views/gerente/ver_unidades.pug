@@ -86,10 +86,10 @@ html
                         td=unidad.marca_unidad+' Modelo '+unidad.modelo_unidad+' No. de plazas '+unidad.numero_plazas
                         td=unidad.kilometraje_actual
                         td
-                          a(href="/editar_unidad"+unidad.numero_economico) 
+                          a(href="/editar_unidad"+unidad.numero_economico+"/"+unidad.id_tipo_unidad) 
                             i(class="material-icons right") edit
                         td
-                          a(href="/borrar_unidad"+unidad.numero_economico)
+                          a(href="/borrar_unidad"+unidad.numero_economico+"/"+unidad.id_tipo_unidad)
                             i(class="material-icons right" style="color:#f00808") delete_forever
                             
         

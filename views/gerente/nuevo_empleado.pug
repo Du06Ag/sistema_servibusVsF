@@ -79,20 +79,20 @@ html
                       input(name="telefono" id="telefono" type="text" class="validate" pattern="\\d{7,18}" required)
                       label(for="telefono" style="color:blue") Telefono
                     div(class="input-field col s6")
-                      input(name="correo" id="correo" type="text" class="validate" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required)
+                      input(name="correo" id="correo" type="text" class="validate" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
                       label(for="correo" style="color:blue") Correo electronico
                     div(class="row")
                       div(class="input-field col s3")
-                        input(id="calle" name="calle" type="text" class="validate" minlength="3" maxlength="30" pattern="^([\\w]+[\\s]*)+$" required)
+                        input(id="calle" name="calle" type="text" class="validate" minlength="3" maxlength="30" pattern="^([\\w]+[\\s]*)+$")
                         label(for="calle" style="color:blue") Calle
                       div(class="input-field col s3")
-                        input(id="num_interior" name="num_interior" type="text" class="validate" minlength="1" maxlength="20" pattern="^([\\w]+[\\/]?[\\.]?[\\s]*)+$" required)
+                        input(id="num_interior" name="num_interior" type="text" class="validate" minlength="1" maxlength="20" pattern="^([\\w]+[\\/]?[\\.]?[\\s]*)+$")
                         label(for="num_interior" style="color:blue") Numero Interior
                       div(class="input-field col s3")
-                        input(id="colonia" name="colonia" type="text" class="validate" minlength="4" maxlength="30" pattern="^([\\w]+[\\.]?[\\s]*)+$" required)
+                        input(id="colonia" name="colonia" type="text" class="validate" minlength="4" maxlength="30" pattern="^([\\w]+[\\.]?[\\s]*)+$")
                         label(for="colonia" style="color:blue") Colonia
                       div(class="input-field col s3")
-                        input(id="codigo_postal" name="codigo_postal" type="text" class="validate" pattern="[1-9][0-9]{4}" maxlenght="5" required)
+                        input(id="codigo_postal" name="codigo_postal" type="text" class="validate" pattern="[1-9][0-9]{4}" maxlenght="5")
                         label(for="codigo_postal" style="color:blue") Codigo Postal
                     div(class="row")
                       div(class="input-field col s3")
@@ -101,7 +101,7 @@ html
                           option(value="M") Hombre
                         label(for="sexo" style="color:blue") Sexo
                       div(class="input-field col s3")
-                        select(class="validate" name="estado_civil" required)
+                        select(class="validate" name="estado_civil")
                           option(value="soltero") Soltero
                           option(value="casado") Casado
                           option(value="divorciado") Divorciado

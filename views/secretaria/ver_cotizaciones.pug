@@ -4,15 +4,24 @@ html
     title ServiBus Website
     
     script(src="javascripts/jquery-3.1.1.js")
+    script(src="/../javascripts/jquery.validate.min.js")
     script(type="text/javascript" src="javascripts/materialize.js")
+    script(type="text/javascript" src="javascripts/moments.js")
+    script(src="/../javascripts/common.js")
+    link(rel="stylesheet" type="text/css" href="/../../stylesheets/default.css")
     
     link(rel="stylesheet" type="text/css" href="stylesheets/style.css")
     link(rel="stylesheet" type="text/css" href="stylesheets/materialize.css")
     link(rel="stylesheet" type="text/css" href="fonts/iconfont/material-icons.css")
-    link(href="/../images/fav.ico/favicon.ico" rel="icon" type="image/ico")
+    link(href="/../images/fav.ico/favicon.ico" rel="icon" type="image/ico") 
     meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
     
-  body
+    
+    
+  body  
+      block scripts_self
+        script(src="/../javascripts/infoCotizaSecre.js")
+        script(src="/../javascripts/navega.js")
         ul(id="dropdown1" class="dropdown-content grey lighten-3")
           li
             a(href="/generar_contrato" class="green-text" style="font-weight:bold") Generar contrato
@@ -46,6 +55,7 @@ html
           div
             div(class="row grey lighten-3")
               div(class="col s1 push-s1 ")
+              
                 ul(id="slide-out" class="sidenav light-blue darken-4")
                   li
                     div(class="user-view")
@@ -55,8 +65,8 @@ html
                         img(class="circle" src="images/media.jpg")
                       a(href="#name")
                         span(class="white-text name" style="font-size:20px") #{user_nombre}
-                      a(href="/logout/")
-                        span(style="color: #ed1b24; font-weight:bold") Cerrar sesion
+                        a(href="/logout/")
+                          span(style="color: #ed1b24; font-weight:bold") Cerrar sesion
                   li
                     a(class="dropdown-trigger white-text" href="#!" data-target="dropdown1") Contrato
                       i(class="material-icons right") arrow_drop_down
@@ -72,57 +82,61 @@ html
                   li
                     a(class="dropdown-trigger white-text" href="#!" data-target="dropdown5") Cotizaciones
                       i(class="material-icons right") arrow_drop_down
+                  
                 a(href="#" data-target="slide-out" class="sidenav-trigger")
                   i(class="material-icons #01579b" style="font-size: 40px; padding-top:30px" ) menu    
               div(class="col s7 push-s2")
                   img(src="images/mapa.png" width="120" height="70" style="padding-top: 10px")
                   h4(class="right green-text darken-4" style="padding-bottom:10px; padding-left:20px") ServiBus Servicios Turisticos Terrestres 
-        
+      block content
+        .modal#detalle_cotizacion(style="width:60%; height: 100%")
+          .modal-content#content-cotizacion
+            .modal.footer
+              a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href="#") Aceptar
+            
         div(clas="container")
           div(class="row")
             div(class="col s12")
-              h4.center.bold Bitacoras registradas            
+              h4.center.bold Cotizaciones              
             div(class="col s12 m10 l10 offset-l1")
-              
+              div(class="col s3 push-s9")
+                each pendiente in data.pendientes
+                  span(class="badge red white-text" data-badge-caption="Cotizaciones pendiente(s)")=pendiente.cotizaciones_pendientes
+              br
               br
               table(class="highlight z-depth-3 centered responsive-table")
                 thead
                   tr
-                    th ID contrato
-                    th Fecha bitacora
-                    th Destino
-                    th Operador
-                    th No. Unidad
-                    th Fecha salida
-                    th Fecha regreso
+                    th No. Cotizacion
+                    th Fecha Salida
+                    th Fecha Regreso
+                    th Itinerario
+                    th(colspan="2") Nombre
+                    th Importe
                     th
                 tbody(id="rows_reportes")
-                  each bitacora in bitacoras
+                  each cotizacion in cotizaciones
                     tr
-                      td=bitacora.id_contrato        
-                      td=bitacora.fecha_bitacora
-                      td=bitacora.destino
-                      td=bitacora.operador
-                      td=bitacora.numero_economico
-                      td=bitacora.fecha_salida
-                      td=bitacora.fecha_regreso
-                      td(align="center" valign="center")
-                        a.margin-lados.tooltipped(data-position="top" data-delay="50" data-tooltip="Imprimir Bitacora de Viaje"  target="_blank" href=`/bitacora/pdf/${bitacora.id_contrato}`)
-                          i.material-icons picture_as_pdf
+                      -color = "red darken-1";
+                      if cotizacion.importe >= 1
+                        -color = 'yellow lighten-2'
+                      td
+                        a(style="padding:0px;" href="#" onclick="modalDetalleCotizacion("+cotizacion.id_cotizacion+");") #{cotizacion.id_cotizacion}
+                        
+                      td=cotizacion.fecha_salida
+                      td=cotizacion.fecha_regreso
+                      td=cotizacion.itinerario
+                      td=cotizacion.estatus
+                      td=cotizacion.nombre
+                      td(class=color)=cotizacion.importe
+                      td
+                        a(href="/editar_cotizacionSecre"+cotizacion.id_cotizacion) 
+                          i(class="material-icons right") edit
+  
                       
-        script.
-              (function($){
-                $(function(){
-                $('.sidenav').sidenav();
-                $(".dropdown-trigger").dropdown();
-                });
-              })(jQuery);
-              $(document).ready(function(){
-                $('.datepicker').datepicker();
-              });
-              $(document).ready(function(){
-                $('.tooltipped').tooltip();
-              });
+                
+
+              
             
               
               

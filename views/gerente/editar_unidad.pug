@@ -3,13 +3,13 @@ html
   head
     title ServiBus Website
     
-    script(src="javascripts/jquery-3.1.1.js")
-    script(type="text/javascript" src="javascripts/materialize.js")
-    script(type="text/javascript" src="javascripts/moments.js")
+    script(src="/../javascripts/jquery-3.1.1.js")
+    script(type="text/javascript" src="/../javascripts/materialize.js")
+    script(type="text/javascript" src="/../javascripts/moments.js")
     
-    link(rel="stylesheet" type="text/css" href="stylesheets/style.css")
-    link(rel="stylesheet" type="text/css" href="stylesheets/materialize.css")
-    link(rel="stylesheet" type="text/css" href="fonts/iconfont/material-icons.css")
+    link(rel="stylesheet" type="text/css" href="/../stylesheets/style.css")
+    link(rel="stylesheet" type="text/css" href="/../stylesheets/materialize.css")
+    link(rel="stylesheet" type="text/css" href="/../fonts/iconfont/material-icons.css")
     link(href="/../images/fav.ico/favicon.ico" rel="icon" type="image/ico")
     meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
     
@@ -36,7 +36,7 @@ html
                       div(class="background green")
                         img(src="")
                       a(href="#user")
-                        img(class="circle" src="images/bground.png")
+                        img(class="circle" src="/../images/bground.png")
                       a(href="#name")
                         span(class="white-text name" style="font-size:20px") #{user_nombre}
                         a(href="/logout/")
@@ -52,7 +52,7 @@ html
                 a(href="#" data-target="slide-out" class="sidenav-trigger")
                   i(class="material-icons #01579b" style="font-size: 40px; padding-top:30px" ) menu    
               div(class="col s7 push-s2")
-                  img(src="images/mapa.png" width="120" height="70" style="padding-top: 10px")
+                  img(src="/../images/mapa.png" width="120" height="70" style="padding-top: 10px")
                   h4(class="right green-text darken-4" style="padding-bottom:10px; padding-left:20px") ServiBus Servicios Turisticos Terrestres 
         
         div(class="container")
@@ -61,7 +61,7 @@ html
               h4.center.bold Actualizar unidad
               label(for="aDate" id="aDate" style="font-size: 20px; color: blue; text-bold; font-weight:bold" class="form-control col s3 push-s9")
               div(class="row")
-                form(class="col s10 push-s1" method="post" action="/unidad/editar/"+data.unidad.numero_economico+"?_method=PUT" style="")
+                form(class="col s10 push-s1" method="post" action="/unidad/editar/"+data.unidad.numero_economico+"/"+data.unidad.id_tipo_unidad+"?_method=PUT" style="")
                   div(class="row")
                     div(class="input-field col s6 push-s3 pull-s3")
                       input(name="estatus" style="visibility:false" type="hidden" value=data.unidad.estatus)

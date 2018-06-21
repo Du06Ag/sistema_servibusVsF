@@ -55,11 +55,12 @@ html
             div(class="col s12")
               h4.center.bold Reportes de Rendimineto y Control de Viajes
               br
-            label(for="aDate" id="aDate" style="font-size: 20px; color: blue; text-bold; font-weight:bold" class="form-control col s3 push-s9")
-            div(class="col l12 m12 s12")            
+            //label(for="aDate" id="aDate" style="font-size: 20px; color: blue; text-bold; font-weight:bold" class="form-control col s3 push-s9")
+            div(class="col s12")            
               table(class="highlight z-depth-3 centered responsive-table")
                 thead
                   tr
+                    th Contrato
                     th Unidad
                     th Operador
                     th Destino
@@ -71,6 +72,7 @@ html
                 tbody(id="body_usuarios")
                   each reporte in reportes
                     tr(class="row")
+                      td=reporte.id_unidad
                       td=reporte.unidad
                       td=reporte.operador
                       td=reporte.destino
