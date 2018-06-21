@@ -1,6 +1,6 @@
 const express = require ('express'),
       app     = express(),
-      port    = process.env.PORT || 3000,
+      port    = process.env.PORT || 3001,
       passport     = require('passport'),
       multer  = require('multer'),
       flash   = require('connect-flash'),
