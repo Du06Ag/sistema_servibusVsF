@@ -13,7 +13,7 @@
 
 function getPersona(form){
 	nombre = form.nombre_persona.value;
-	$.get('/../api/persona/buscar/nombre/'+nombre, function(data, status){
+	$.get('/../api/persona/buscar/nombreSecre/'+nombre, function(data, status){
       persona="";
       data.forEach(function(element, index){
         persona += `<li>
@@ -22,7 +22,7 @@ function getPersona(form){
                   account_circle
                 </i>
                 ${element.nombre} ${element.ap_paterno}  ${element.ap_materno}
-                <a href="/persona/editar${element.id_persona}">
+                <a href="/persona/editarSecre${element.id_persona}">
 								    <i class="material-icons right blue-text tooltipped"  data-position="top" data-delay="50" data-tooltip="Editar al empleado" >
 									    edit
 								    </i>

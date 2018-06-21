@@ -5,6 +5,7 @@ function findContrato(form){
       info = `
           <div class="row" >
             <input id="contratoId" name="orden_servicioId" type="text" class="validate color-text-blue" value="${data.info.id_orden_servicio}" readonly style="visibility:hidden" ></input>
+            <input id="tipoId" name="tipoId" type="text" class="validate color-text-blue" value="${data.info.id_tipo_unidad}" readonly style="visibility:hidden" ></input>
             <div class="input-field col s8">
               <input id="operador" type="text" class="validate color-text-blue" value="${data.info.operador}" readonly></input>
               <label for="operador" style="color:blue" class="active"> Nombre del operador </label>
@@ -116,7 +117,10 @@ function findContrato(form){
             </div>
           </div>
           <div class="row">
-            <div class="input-field col s2">
+            <div class="input-field col s1">
+              <input id="idunidad" name="idunidad" type="text" style="visibility:hidden" value="${data.info.id_unidad}"></input>
+            </div>
+            <div class="input-field col s1">
               <input id="kmMantenimiento" name="kmMantenimiento" type="text" style="visibility:hidden" value="${data.info.kilometraje_mantenimineto}"></input>
             </div>
             <div class="input-field col s2">

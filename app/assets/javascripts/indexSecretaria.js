@@ -317,7 +317,7 @@ function findOrdenContrato(form){
 							<input id="contratoId" name="contratoId" type="text" class="validate color-text-blue" value="${data.info.contrato}" readonly style="visibility:hidden" ></input>
 						</div>
 						<div class="input-field col s4">
-							<input id="unidadId" name="unidadId" type="text" class="validate color-text-blue" value="${data.info.numero_economico}" readonly style="visibility:hidden" ></input>
+							<input id="unidadId" name="unidadId" type="text" class="validate color-text-blue" value="${data.info.id_unidad}" readonly style="visibility:hidden" ></input>
 						</div>
 					</div>
 					<div class="row">
@@ -409,13 +409,13 @@ function getunidad(form){
                   airport_shuttle
                 </i>
                 Numero economico ${element.numero}
-                <i class="material-icons right" onclick="seleccionarUnidad(${element.numero});">
+                <i class="material-icons right" onclick="seleccionarUnidad(${element.id_unidad});">
                     add_circle
                 </i>
               </div>
               <div class="collapsible-body">
-								<strong style="font-weight: bold;"> Numero de unidad</strong>
-								<span> ${element.numero}  </span>
+								<strong style="font-weight: bold;"> identificador de unidad</strong>
+								<span> ${element.id_unidad}  </span>
 								<br>
                 <strong style="font-weight: bold;"> Marca: </strong>
                 <span>${element.marca} </span>
