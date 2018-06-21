@@ -29,7 +29,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // requieridos por passport
-app.use(session({ secret: 'ppcdsalvc', resave: true, saveUninitialized:true })); // session secret
+app.use(session({ secret: 'ppcdsalvc', resave: true, saveUninitialized:true, cookie: { maxAge: 1800000 } })); // session secret
 app.use(require('connect-flash')());
 app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res);
