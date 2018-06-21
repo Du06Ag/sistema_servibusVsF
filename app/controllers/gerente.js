@@ -242,24 +242,30 @@ exports.agregarUnidad = (req, res) => {
         if(err){
           console.log(err);
         }else{
-          console.log('success');
+          db.query("insert into reporte_mantenimiento (estatus, id_unidad) values ('Realizado',?);", [rows.insertId], (err, rows) => {
+            if(err){
+              console.log(err);
+            }else{
+              console.log('Success');
+              res.redirect('/ver_unidades');
+            }
+          });
         }
       });
-      res.redirect('/ver_unidades');
     }
 
 exports.editUnidad = (req, res) => {
   console.log('GET /editUnidad/:numero_economico');
-  console.log(req.params.numero_economico);
+  console.log(req.params.numero_economico," ",req.params.tipo);
   data={}
-  db.query("select estatus from unidad where numero_economico=?;",req.params.numero_economico, (err, rows) => {
+  db.query("select estatus from unidad where numero_economico=? and id_tipo_unidad=?;", [req.params.numero_economico, req.params.tipo], (err, rows) => {
     data['estatus'] = JSON.parse(JSON.stringify(rows[0]));
     console.log(data['estatus']);
     if(data.estatus.estatus == "En servicio"){
       console.log('no se puede editar unidad en servicio');
       res.redirect('/ver_unidades');
     }else{
-      db.query("select unidad.numero_economico, unidad.numero_placas, unidad.kilometraje_actual, unidad.estatus, unidad.estado, tipo_unidad.id_tipo_unidad, tipo_unidad.marca_unidad, tipo_unidad.modelo_unidad, tipo_unidad.numero_plazas from unidad inner join tipo_unidad on tipo_unidad.id_tipo_unidad = unidad.id_tipo_unidad where unidad.numero_economico =?;",req.params.numero_economico, (err, rows) =>{
+      db.query("select unidad.numero_economico, unidad.numero_placas, unidad.kilometraje_actual, unidad.estatus, unidad.estado, tipo_unidad.id_tipo_unidad, tipo_unidad.marca_unidad, tipo_unidad.modelo_unidad, tipo_unidad.numero_plazas from unidad inner join tipo_unidad on tipo_unidad.id_tipo_unidad = unidad.id_tipo_unidad where unidad.numero_economico =? and unidad.id_tipo_unidad=?;", [req.params.numero_economico, req.params.tipo], (err, rows) =>{
         data['unidad'] = JSON.parse(JSON.stringify(rows[0]));
         if(err){
           console.log(err);
@@ -274,14 +280,17 @@ exports.editUnidad = (req, res) => {
 
 //put updateUnidad
 exports.updateUnidad = (req, res) =>{
-  console.log('PUT /unidad/editar/:id_unidad', req.params.numero_economico);
+  console.log('PUT /unidad/editar/:id_unidad', req.params.numero_economico , ' ',req.params.tipo);
 
-  parms = [req.body.noPlacas,req.body.kmActual,req.body.uni,req.params.numero_economico];
+  parms = [req.body.noPlacas,req.body.kmActual,req.body.uni,req.params.numero_economico,req.params.tipo];
   console.log(parms);
-  db.query("update unidad set numero_placas=?, kilometraje_actual=?, estatus=? where numero_economico=?;", parms, (err, result) => {
+  db.query("update unidad set numero_placas=?, kilometraje_actual=?, estatus=? where numero_economico=? and id_tipo_unidad=?;", parms, (err, result) => {
+    if(err){
       console.log(err);
-      console.log(result);
+    }else{
+      console.log('Success');
       res.redirect('/ver_unidades');
+    }
   });
 }
 
@@ -312,20 +321,27 @@ exports.unidadEstatus = function(req, res){
 exports.borrarUnidad = function(req, res){
     		console.log(' GET /borrarUnidad:numero_economico');
         num_eco = req.params.numero_economico;
+        tipo= req.params.tipo;
         console.log(num_eco);
         data = {}
-        db.query('select estatus from unidad where numero_economico=?;', num_eco, (err, rows) =>{
+        db.query('select estatus from unidad where numero_economico=? and id_tipo_unidad=?;', [num_eco, tipo], (err, rows) =>{
           data['estatus'] = JSON.parse(JSON.stringify(rows[0]));
           if(data.estatus.estatus =="En servicio"){
             console.log('No puede dar de baja a una unidad en servicio');
             res.redirect('/ver_unidades');
           }else{
-            db.query("update unidad set estado='Baja' where numero_economico=?;", num_eco, (err, rows) =>{
+            db.query("update unidad set estado='Baja' where numero_economico=? and id_tipo_unidad=?;", [num_eco, tipo], (err, rows) =>{
               if(err){
                 console.log(err);
               }else{
-                console.log('Success');
-                res.redirect('/ver_unidades');
+                db.query("update reporte_mantenimiento set estado='Baja' where numero_economico=? and tipo_unidad=?;", [num_eco, tipo], (err, rows) =>{
+                  if(err){
+                    console.log(err);
+                  }else{
+                    console.log('Success');
+                    res.redirect('/ver_unidades');
+                  }
+                });
               }
             });
           }

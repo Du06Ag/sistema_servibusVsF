@@ -46,7 +46,9 @@ module.exports = {
                           text:'ServiBus ', bold:true, fontSize:25, color: '#498c20',
                         },
                         '', {
-                          text:' CONTRATO DE TRANSPORTE\n', fontSize:12,
+                          text:' CONTRATO DE TRANSPORTE: ', fontSize:12,
+                        },'', {
+                          text:`${data.id_contrato}\n`, color:'#f40707', bolt:true, fontSize:12
                         },
                         'Chilpancingo Gro. A ', {
                           text: `${data.fecha_contrato}\n\n`
@@ -81,11 +83,11 @@ module.exports = {
                         '\n Itinerario: ',
                         {text: data.itinerario, bold: false, color: '#040505'},
                         //precio
-                        '\n\n Precio total:        ',
+                        '\n\n Precio total: $      ',
                         {text: data.importe, bold:false, color: '#040505'},
-                        '            Anticipo:        ',
+                        '            Anticipo: $      ',
                         {text: data.anticipo_numero, bold:false, color: '#040505'},
-                        '            Saldo:         ',
+                        '            Saldo: $       ',
                         {text: data.importe_restante, bold:false , color: '#040505', color: '#040505'},
                         //observaciones
                         '\n\nObservaciones:',
@@ -200,7 +202,7 @@ module.exports = {
                             text: 'FOLIO', color:'#f40707',background:'#fcfcfc', alignment:'center', fontSize:9,
                        },
                        '\n',{
-                            text:`${data.contrato || ''}`, bold:true, fontSize:10, alignment:'center',
+                            text:`${data.contrato || ''}`, bold:true, fontSize:12, color:'#f40707', alignment:'center',
                        }
 
                      ]},
@@ -770,10 +772,10 @@ module.exports = {
               },
               {
                 text:['',{
-                    text:'CONTRATO DE TRANSPORTACION                     ', fontSize:8, alignment: 'right', color: '#054f95',
+                    text:'CONTRATO DE TRANSPORTACION:                     ', fontSize:8, alignment: 'right', color: '#054f95',
                 },
                 '',{
-                    text:`${data.id_contrato || ''}`, bold:true, fontSize:9, alignment: 'right',
+                    text:`${data.id_contrato || ''}`, bold:true, fontSize:10, color:'#f40707', alignment: 'right',
                 }
                 ]
               },
@@ -850,7 +852,7 @@ module.exports = {
                       width: 200,
                       fontSize:9,
                       text: ['\n\nKm de salida:  ', {
-                          text: `${data.kilometros_salida || ``}`, bold:true, fontsize:10, color: '#000000', alignment: 'center'
+                          text: '__________________', bold:true, fontsize:10, color: '#1e85e7', alignment: 'center'
                       },
                       '\n\n\nTotal de Kilometros\n recorrios: ',
                       {   text: '_______________________',color: '#1e85e7'},
@@ -892,7 +894,7 @@ module.exports = {
                 fontSize: 9,
                 color: '#000000',
                 text:['\n\n\n\n\nOperador:   ',
-                {text:'___________________________________________________________________________________________________________________', color: '#1e85e7'}]
+                {text:`${data.operador || ``}\n\n\n`, bold:true, fontsize:10, color: '#000000', alignment: 'center'}]
               },
               {
                 fontSize: 9,
