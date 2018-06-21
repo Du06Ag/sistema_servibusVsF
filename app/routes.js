@@ -48,13 +48,13 @@ module.exports = function(app, passport, express) {
 
 		router.get('/registrar_unidad', isLoggedIn, isAdministrador, gerenteCTRL.newUnidad);
 		router.post('/agregar_unidad', isLoggedIn, isAdministrador, gerenteCTRL.agregarUnidad);
-		router.get('/editar_unidad:numero_economico', isLoggedIn, isAdministrador, gerenteCTRL.editUnidad);
-		router.put('/unidad/editar/:numero_economico', isLoggedIn, isAdministrador, gerenteCTRL.updateUnidad);
+		router.get('/editar_unidad:numero_economico/:tipo', isLoggedIn, isAdministrador, gerenteCTRL.editUnidad);
+		router.put('/unidad/editar/:numero_economico/:tipo', isLoggedIn, isAdministrador, gerenteCTRL.updateUnidad);
 		router.get('/ver_unidades', isLoggedIn, isAdministrador, gerenteCTRL.viewUnidades);
 
 		// cambiar de estado
     router.put('/unidad/', isLoggedIn, isAdministrador, gerenteCTRL.unidadEstatus);
-		router.get('/borrar_unidad:numero_economico', isLoggedIn, isAdministrador, gerenteCTRL.borrarUnidad);
+		router.get('/borrar_unidad:numero_economico/:tipo', isLoggedIn, isAdministrador, gerenteCTRL.borrarUnidad);
 
 	  //contador
  	  router.get('/indexConta', isLoggedIn, contadorCTRL.home);
@@ -93,6 +93,16 @@ module.exports = function(app, passport, express) {
 		router.post('/agendar/contrato', isLoggedIn, secretariaCTRL.agendar);
 		router.get('/editar_agenda:agenda', isLoggedIn, secretariaCTRL.editarAgenda);
 		router.put('/update/agenda/:id_agenda', isLoggedIn, secretariaCTRL.updateAgenda);
+
+		//cotizaciones
+		router.get('/cotizacion_presencialSecre', isLoggedIn, secretariaCTRL.cotiza);
+		router.get('/ver_cotizacionesSecre', isLoggedIn, secretariaCTRL.verCotizaciones);
+		router.post('/registrar_cotiSecre', isLoggedIn, secretariaCTRL.registrar_coti);
+		router.get('/editar_cotizacionSecre:id_cotizacion', isLoggedIn, secretariaCTRL.editar_cotizacion);
+		router.put('/cotiza/editSecre/:id_cotizacion', isLoggedIn, secretariaCTRL.update_coti);
+
+		router.get('/persona/editarSecre:id_persona', isLoggedIn, secretariaCTRL.verPersona);
+		router.put('/persona/editSecre/:id_persona', isLoggedIn, secretariaCTRL.editarPersona);
 
 	  //recepcionista
     router.get('/indexRecep', isLoggedIn, recepcionistaCTRL.ini);
@@ -136,6 +146,9 @@ module.exports = function(app, passport, express) {
 		api.route('/persona/buscar/nombre/:nombre/')
 		    .get(isLoggedIn, recepcionistaCTRL.APIBuscarPorPersonaNombre);
 
+		api.route('/persona/buscar/nombreSecre/:nombre/')
+		    .get(isLoggedIn, secretariaCTRL.APIBuscarPorPersonaNombre);
+
 		//api busca por correo electronico
 		api.route('/persona/buscar/correo/:email/')
 			  .get(clienteCTRL.APIBuscarPorPersonaEmail);
@@ -143,6 +156,9 @@ module.exports = function(app, passport, express) {
 	  // api/cotizacion
 		api.route('/cotiza/:id_cotizacion/')
 		   .get(isLoggedIn, recepcionistaCTRL.APIDetalleCotizacion);
+
+	  api.route('/cotizaSecre/:id_cotizacion/')
+		   .get(isLoggedIn, secretariaCTRL.APIDetalleCotizacion);
 
 		//api/busca folio de cotizacion
 		api.route('/cotizaciones/:cotizacion/')
