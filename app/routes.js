@@ -193,6 +193,28 @@ module.exports = function(app, passport, express) {
 	 api.route('/operador/buscar/')
 	 		 .get(isLoggedIn, secretariaCTRL.APIOperadorDisponible);
 
+	//---------------busquedas--------------------------
+	api.route('/agenda/buscarCliente/:nombre')
+			.get(isLoggedIn, secretariaCTRL.APIbusquedaAgenda);
+
+	api.route('/rendimiento/buscarXfecha/:tipo/:unidad/:fecha')
+			.get(isLoggedIn, contadorCTRL.APIbusquedaRepRendimiento);
+
+	api.route('/cotizacion/busquedas/:busca/:valor')
+			.get(isLoggedIn, secretariaCTRL.APIbusquedaCotizacion);
+
+	api.route('/cotizacion/busquedasRecep/:busca/:valor')
+			.get(isLoggedIn, recepcionistaCTRL.APIbusquedaCotizacionRecep);
+
+	api.route('/contrato/busquedas/:busca/:valor')
+			.get(isLoggedIn, secretariaCTRL.APIbusquedaContratos);
+
+	api.route('/bitacora/buscarBitacoras/:valor')
+			.get(isLoggedIn, secretariaCTRL.APIbusquedaBitacora);
+
+	api.route('/ordenServicio/buscar/:valor')
+			.get(isLoggedIn, secretariaCTRL.APIbuscaOrdenServicio);
+
 		app.use('/api', api);
 
 		app.use(function(req, res){
