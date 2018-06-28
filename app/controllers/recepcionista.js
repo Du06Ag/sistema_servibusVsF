@@ -166,3 +166,32 @@ exports.APIBuscarPorPersonaNombre = function(req, res){
                 console.log(personas);
             });
         }
+
+//cotizacon recepcionista
+ exports.APIbusquedaCotizacionRecep = function(req, res) {
+    console.log('GET /api/cotizacion/busqueda', req.params.busca,' ',req.params.valor);
+    query='select concat(persona.nombre," ",persona.ap_paterno," ",persona.ap_materno)as nombre, persona.estatus,persona.telefono, persona.correo_electronico, concat(persona.calle," ",persona.numero_interior," ",persona.colonia," ",persona.codigo_postal)as direccion, cotizacion.id_cotizacion, date_format(fecha_salida, "%e-%m-%Y") as fecha_salida, cotizacion.itinerario, date_format(fecha_regreso, "%e-%m-%Y") as fecha_regreso, cotizacion.importe, cotizacion.id_persona, cotizacion_tipounidad.id_tipo_unidad, cotizacion_tipounidad.numero_unidades, concat(tipo_unidad.marca_unidad," ",tipo_unidad.modelo_unidad," ",tipo_unidad.numero_plazas) as modelo from cotizacion inner join persona on persona.id_persona = cotizacion.id_persona inner join cotizacion_tipounidad on cotizacion_tipounidad.id_cotizacion = cotizacion.id_cotizacion inner join tipo_unidad on tipo_unidad.id_tipo_unidad = cotizacion_tipounidad.id_tipo_unidad where persona.nombre like "%'+req.params.valor+'%";';
+
+    query1='select concat(persona.nombre," ",persona.ap_paterno," ",persona.ap_materno)as nombre, persona.estatus,persona.telefono, persona.correo_electronico, concat(persona.calle," ",persona.numero_interior," ",persona.colonia," ",persona.codigo_postal)as direccion, cotizacion.id_cotizacion, date_format(fecha_salida, "%e-%m-%Y") as fecha_salida, cotizacion.itinerario, date_format(fecha_regreso, "%e-%m-%Y") as fecha_regreso, cotizacion.importe, cotizacion.id_persona, cotizacion_tipounidad.id_tipo_unidad, cotizacion_tipounidad.numero_unidades, concat(tipo_unidad.marca_unidad," ",tipo_unidad.modelo_unidad," ",tipo_unidad.numero_plazas) as modelo from cotizacion inner join persona on persona.id_persona =cotizacion.id_persona inner join cotizacion_tipounidad on cotizacion_tipounidad.id_cotizacion = cotizacion.id_cotizacion inner join tipo_unidad on tipo_unidad.id_tipo_unidad = cotizacion_tipounidad.id_tipo_unidad where cotizacion.destino like "%'+req.params.valor+'%";';
+    if(req.params.busca == "Cliente"){
+      db.query(query, (err, rows) => {
+        if(err){
+          res.status(500).json({error: 'Error al realizar la busqueda'});
+        }else{
+          var solicitudes = JSON.parse(JSON.stringify(rows));
+          res.status(200).json(solicitudes);
+          console.log(solicitudes);
+        }
+      });
+    }else{
+      db.query(query1, (err, rows) => {
+        if(err){
+          res.status(500).json({error: 'Error al realizar la busqueda'});
+        }else{
+          var solicitudes = JSON.parse(JSON.stringify(rows));
+          res.status(200).json(solicitudes);
+          console.log(solicitudes);
+        }
+      });
+    }
+  }

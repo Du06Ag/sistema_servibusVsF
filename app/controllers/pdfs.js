@@ -930,5 +930,747 @@ module.exports = {
         var pdfDoc = printer.createPdfKitDocument(dd);
         pdfDoc.pipe(res);
 	    pdfDoc.end();
-    }
+    },
+
+    bitacoraSprinterPDF: (data, res) => {
+      var dd={
+          content:[
+              {
+                  columns: [
+                      {
+                          width: '100%',
+                          text: 'EJECUTIVOS DE CHILAPAN, S.A. DE C.V.\n\n', style: 'header', bold:true, fontSize:23, alignment: 'center', color: '#080909',
+                      },
+
+                  ]
+              },
+              {
+                text: [
+                    '',
+                    {text:'\nCALLEJON 22 SUR S/N COLONIA SAN JOSE C.P. 04100 CHILAPA DE ALVAREZ GUERRERO\n           ', bold:false, fontSize:10, alignment: 'center'}
+                ]
+              },
+              {
+
+                columns: [
+                  {
+                       width:'90%',
+                       text: ['\n ',{
+                           text: '                                                           BITACORA DE HORAS DE SERVICIO DEL CONDUCTOR                              ', alignment:'center', fontSize:10, background:'#98ff98',
+                       }
+                     ]},
+                     {
+                       width:'10%',
+                       text: ['\n',{
+                            text: 'FOLIO', color:'#f40707',background:'#fcfcfc', alignment:'center', fontSize:9,
+                       },
+                       '\n',{
+                            text:`${data.contrato || ''}`, bold:true, fontSize:12, color:'#f40707', alignment:'center',
+                       }
+
+                     ]},
+                ]
+              },
+              {
+                text: ['\n',
+                    {text:'FECHA DE ELABORCION:           ', fontSize:9, alignment:'right'},
+                    '',
+                    {text:`${data.fecha_bitacora || ''}`, fontSize:10, bold:true, alignment:'right'},
+                ],
+              },
+              {
+                text: ['\n',
+
+                ],
+              },
+
+              {
+                style: 'table',
+                table: {
+                    widths: [50, 50, 50, 50, 50,50,50,50,33,1],
+                    body: [
+                      [
+                      {
+                        colSpan: 2,
+                        text: 'TIPO DE SERVICIO:',
+                        bold: false,
+                        alignment: 'left',
+                        fontSize: 8
+                      },{},
+                      {
+
+                        text: 'MODALIDAD:',
+                        bold: false,
+                        alignment: 'left',
+                        fontSize: 8
+                      },
+                      {
+                        colSpan:2,
+                        text: 'MARCA:',
+                        bold: false,
+                        alignment: 'left',
+                        fontSize: 8
+                      },{},
+                      {
+                        text: 'MODELO:',
+                        bold: false,
+                        alignment: 'left',
+                        fontSize: 8
+                      },
+                      {
+                        text: 'PLACAS NO.:',
+                        bold: false,
+                        alignment: 'left',
+                        fontSize: 8
+                      },
+                      {
+                        colSpan: 2,
+                        text: 'NO. ECONOMICO:',
+                        bold: false,
+                        alignment: 'left',
+                        fontSize: 8
+                      },{}
+                      ],
+                      [
+                      {
+                        colSpan: 2,
+                        text: '\n TURISMO',
+                        bold: true,
+                        alignment: 'center',
+                        fontSize: 9
+                      },{},
+                      {
+
+                        text: '\n ',
+                      },
+                      {
+                        colSpan: 2,
+                        text: '\n'+data.marca || '',
+                        alignment: 'center',
+                        fontSize: 9,
+                        bold: true
+                      },{},
+                      {
+                        text: data.modelo || '',
+                        alignment:'center',
+                        fontSize: 9,
+                        bold: true
+                      },
+                      {
+                        text:'\n'+ data.placas || '',
+                        alignment:'center',
+                        fontSize: 9,
+                        bold: true
+                      },
+                      {
+                        colSpan: 2,
+                        text: '\n'+data.numero_economico || '',
+                        alignment: 'center',
+                        fontSize: 9,
+                        bold: true
+                      },{}
+                      ],
+                      [
+                      {
+                        colSpan:2,
+                        text: 'NOMBRE DEL \nOPERADOR \n      ',
+                        alignment: 'center',
+                        fontSize: 8
+                      },{},
+                      {
+                        colSpan:8,
+                        text:'\n'+ data.operador || '',
+                        alignment: 'center',
+                        fontSize: 9,
+                        bold: true
+                      },{},{},{},{},{},{},{}
+                      ],
+                      [
+                      {
+                        colSpan:2,
+                        text:'DATOS DE LA \nLICENCIA\n     ',
+                        alignment: 'center',
+                        fontSize: 8,
+                      },{},
+                      {
+                        colSpan: 3,
+                        alignment:'center',
+                        fontSize:9,
+                        bold:true,
+                        text: [
+                                {
+                                  text:'\nNo.          ',
+                                },
+                                data.numero_licencia || ''
+                            ]
+                      },{},{},
+                      {
+
+                        alignment:'center',
+                        fontSize:9,
+                        bold:true,
+                        text: [
+                                {
+                                  text:'TIPO           ',
+                                },
+                                data.tipo_licencia || ''
+                            ]
+                      },
+                      {
+
+                        colSpan: 3,
+                        alignment:'center',
+                        fontSize:9,
+                        bold:true,
+                        text: [
+                                {
+                                  text:'\nVIGENCIA          ',
+                                },
+                                data.vigencia_licencia || ''
+                            ]
+                      },{},{}
+                      ],
+                      [
+                      {
+                        rowSpan:2,
+                        colSpan: 2,
+                        text:'EN CASO DE APLICAR \n DATOS DEL 2nd. \nOPERADOR',
+                        fontSize: 8,
+                        alignment: 'center'
+                      },{},
+                      {
+                        colSpan: 8,
+                        text:'      \n          ',
+                        fontSize:9
+                      },{},{},{},{},{},{},{}
+                      ],
+                      [
+                      {
+
+                      },{},
+                      {
+                        colSpan: 3,
+                        text: 'LICENCIA No.    ',
+                        fontSize: 8,
+                        alignment: 'left'
+                      },{},{},
+                      {
+                        text: 'TIPO    \n      ',
+                        fontSize: 8,
+                        alignment: 'left'
+                      },
+                      {
+                        colSpan: 3,
+                        text: 'VIGENCIA   ',
+                        fontSize: 8,
+                        alignment: 'left'
+                      },{},{}
+                      ],
+                      [
+                      {
+                        colSpan:9,
+                        fontSize:9,
+                        bold: true,
+                        text: '\nORIGEN:     '+ data.origen + '                                        DESTINO:      '+ data.destino+'\n   '
+                      },{},{},{},{},{},{},{},{}
+                      ],
+                      [
+                      {
+                        colSpan: 3,
+                        fontSize: 8,
+                        text: 'HORAS / DIAS',
+                        alignment: 'center'
+                      },{},{},
+                      {
+                        colSpan: 3,
+                        fontSize: 8,
+                        text: 'HORA DE SALIDA',
+                        alignment: 'center'
+                      },{},{},
+                      {
+                        colSpan: 3,
+                        fontSize: 8,
+                        text: 'HORA DE LLEGADA',
+                        alignment: 'center',
+                      },{},{}
+                      ],
+                      [
+                      {
+                        colSpan: 3,
+                        fontSize: 8,
+                        text: 'DE SERVICIO CONDICIENDO "C" ',
+                        alignment: 'left',
+                      },{},{},
+                      {
+                        rowSpan: 3,
+                        colSpan: 3,
+                        text:' '
+                      },{},{},
+                      {
+                        rowSpan: 3,
+                        colSpan:3,
+                        text: ' '
+
+                      },{},{},
+                      ],
+                      [
+                      {
+                        colSpan: 3,
+                        fontSize: 8,
+                        text: 'DE SERVICIO SIN CONDUCIR "S" ',
+                        alignment: 'left',
+                      },{},{},
+                      {
+
+                      },{},{},
+                      {
+
+                      },{},{},
+                      ],
+                      [
+                      {
+                        colSpan: 3,
+                        fontSize: 8,
+                        text: 'FUERA DE SERVICIO "F" ',
+                        alignment: 'left',
+                      },{},{},
+                      {
+
+                      },{},{},
+                      {
+
+                      },{},{},
+                      ],
+                      [
+                      {
+                        colSpan: 3,
+                        fontSize: 8,
+                        text: 'DE DESCANSO "D" ',
+                        alignment: 'left'
+                      },{},{},
+                      {
+                        colSpan: 6,
+                        fontSize: 9,
+                        bold: true,
+                        text: 'TIPO DE TRASLADO:     '+ data.tipo_traslado,
+                        alignment: 'center'
+                      },{},{},{},{},{}
+                      ],
+                      [
+                      {
+                        colSpan: 9,
+                        text: 'BITACORA DEL CONDUCTOR',
+                        fontSize: 8,
+                        alignment: 'center'
+                      },{},{},{},{},{},{},{},{}
+                      ],
+                      [
+                      {
+                        colSpan: 9,
+                        style:'table',
+                        table: {
+                            widths: [10,25,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],
+                            body: [
+                              [
+                              {
+                                text: 'DIA',
+                                bold: true,
+                                alignment: 'center',
+                                fontSize: 4
+                              },{fontSize:4,text:'OPERADOR',bold:true},{fontSize:4,text:'01:00'},{fontSize:4,text:'02:00'},{fontSize:4,text:'03:00'},{fontSize:4,text:'04:00'},{fontSize:4,text:'05:00'},{fontSize:4,text:'06:00'},
+                              {fontSize:4,text:'07:00'},{fontSize:4,text:'08:00'},{fontSize:4,text:'09:00'},{fontSize:4,text:'10:00'},{fontSize:4,text:'11:00'},{fontSize:4,text:'12:00'},{fontSize:4,text:'13:00'},{fontSize:4,text:'14:00'},
+                              {fontSize:4,text:'15:00'},{fontSize:4,text:'16:00'},{fontSize:4,text:'17:00'},{fontSize:4,text:'18:00'},{fontSize:4,text:'19:00'},{fontSize:4,text:'20:00'},{fontSize:4,text:'21:00'},{fontSize:4,text:'22:00'},
+                              {fontSize:4,text:'23:00'},{fontSize:4,text:'00:00'}
+                              ],
+                              [
+                              {
+                                text:'1',
+                                fontSize:6,
+                                bold:true,
+                                alignment:'center'
+                              },{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}
+                              ],
+                              [
+                              {
+                                text:'2',
+                                fontSize:6,
+                                bold:true,
+                                alignment:'center'
+                              },{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}
+                              ],
+                              [
+                              {
+                                text:'3',
+                                fontSize:6,
+                                bold:true,
+                                alignment:'center'
+                              },{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}
+                              ],
+                              [
+                              {
+                                text:'4',
+                                fontSize:6,
+                                bold:true,
+                                alignment:'center'
+                              },{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}
+                              ],
+                              [
+                              {
+                                text:'5',
+                                fontSize:6,
+                                bold:true,
+                                alignment:'center'
+                              },{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}
+                              ],
+                              [
+                              {
+                                text:'6',
+                                fontSize:6,
+                                bold:true,
+                                alignment:'center'
+                              },{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}
+                              ],
+                              [
+                              {
+                                text:'7',
+                                fontSize:6,
+                                bold:true,
+                                alignment:'center'
+                              },{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}
+                              ],
+                              [
+                              {
+                                text:'8',
+                                fontSize:6,
+                                bold:true,
+                                alignment:'center'
+                              },{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}
+                              ],
+
+                            ]
+                        },
+                      },{},{},{},{},{},{},{},{}
+                      ],
+                      [
+                      {
+                        colSpan: 9,
+                        fontSize: 8,
+                        text: 'CASOS DE EXCEPCION:',
+                        alignment: 'center'
+                      },{},{},{},{},{},{},{},{}
+                      ],
+                      [
+                      {
+                        colSpan: 9,
+                        fontSize: 7,
+                        text: ' '
+                      },{},{},{},{},{},{},{},{}
+                      ],
+                      [
+                      {
+                        colSpan: 3,
+                        fontSize: 8,
+                        text: 'ELABORO NOMBRE Y FIRMA',
+                        alignment: 'center'
+                      },{},{},
+                      {
+                        colSpan: 3,
+                        fontSize: 8,
+                        text: 'FIRMA DEL RESPONSABLE',
+                        alignment: 'center'
+                      },{},{},
+                      {
+                        colSpan: 3,
+                        fontSize: 8,
+                        text: 'FIRMA DEL CONDUCTO',
+                        alignment: 'center'
+                      },{},{}
+                      ],
+                      [
+                      {
+                        rowSpan: 3,
+                        text: '',
+                        colSpan:3,
+                        fontSize:30
+                      },{},{},
+                      {
+                        rowSpan: 3,
+                        text: '',
+                        colSpan:3,
+                        fontSize:30
+                      },{},{},
+                      {
+                        rowSpan: 3,
+                        text: 'aasdas',
+                        colSpan:3,
+                        color:'#ffffff',
+                        fontSize:40
+                      },{},{},
+                      ],
+                      [
+                      {
+
+                      },{},{},
+                      {
+
+                      },{},{},
+                      {
+
+                      },{},{},
+                      ],
+                      [
+                      {
+
+                      },{},{},
+                      {
+
+                      },{},{},
+                      {
+
+                      },{},{},
+                      ],
+                      [
+                      {
+                        colSpan: 9,
+                        fontSize:8,
+                        bold:true,
+
+                        text: [
+                                {
+                                  text:'FUNDAMENTO LEGAL:          \n\n ARTICULO 83RTCF .- TODOS LOS CONDUCTORES DE VEHICULOS QUE ESTEN AMPARADOS CON PERMISO EXPEDIDO POR LA SECRETARIA DE COMUNICACIONES Y TRANSPORTE PORTARAN, DEBIDAMENTE REGISTRADA, LA BITACORA A QUE SE REFIERE EL PRESENTE ARTICULO, ASI COMO LAS DE LOS SIETE DIAS ANTERIORES, LOS PERMISIONARIOS DEBERAN CONSERVAR LAS BITCORAS POR UN PERIODO DE 60 DIAS, CONTADOS A PARTIR DEL DIA QUE CORRESPONDA SU ELABORACION. (REFORMA PUBLICA EN EL DOF DE FECHA 29 DE MARZO DE 2000).',
+                                },
+
+                            ]
+                      }
+                      ]
+
+                    ]
+                }
+
+              },
+              {
+                text: ['',
+                    {text:'NOTA: ', fontSize:9, bold: true},
+                    '',
+                    {text:'LA CONDUCCION NO DEBERA EXCEDER DE 8 HRS', fontSize:9, bold:false},
+                ],
+              }
+
+          ],
+          style: {
+             header: {
+               fontsize: 30,
+               bold: true,
+               margin:[0, 0, 0, 0]
+             },
+             table: {
+                    margin: [0, 0, 0, 0],
+                    fontSize: 11,
+                    border: [true,true,true,true]
+             },
+             subheader: {
+                      fontSize: 13.5,
+                      bold: true,
+                      alignment: 'justify'
+                  }
+          },
+      }
+      var pdfDoc = printer.createPdfKitDocument(dd);
+      pdfDoc.pipe(res);
+    pdfDoc.end();
+  },
+
+  ordenSprinterPDF: (data, res) => {
+      var dd={
+          content:[
+            {
+              columns: [
+                  {
+                    // auto-sized columns have their widths based on their content
+                    text: '\n\n\nEJECUTIVOS DE CHILAPAN, S.A. DE C.V.',
+                    bold:true, fontSize:19,alignment: 'right', color: '#080909',
+                    width:350,
+                    height:150,
+                  },
+                  {
+                    // % width
+                    width: 200,
+                    height: 150,
+                    image: __dirname + '/../assets/images/sprinter.png',
+
+                  }
+                ],
+            },
+            {
+              columns: [
+                {
+                  text: 'CALLEJON 22 SUR S/N COLONIA SAN JOSE C.P. 04100 CHILAPA DE ALVAREZ\n GUERRERO',
+                  fontSize:13,alignment: 'justify', color: '#080909',
+                  width:500,
+                  height:150,
+                }
+
+              ]
+            },
+            {
+              text:['',{
+                  text:'Orden de Servicio:                     ', fontSize:8, alignment: 'right', color: '#054f95',
+              },
+              '',{
+                  text:`${data.id_contrato || ''}`, bold:true, fontSize:10, color:'#f40707', alignment: 'right',
+              }
+              ]
+            },
+            {
+              fontSize:8,
+              alignment:'right',
+              color: '#054f95',
+              text:['\nChilpancingo, Gro, a            ', {
+                text:`${data.fecha_orden_servicio || ''}`, bold:true, fontSize:9
+              }]
+            },
+            {
+              fontSize: 9,
+              bold: true,
+              color:'#000000',
+              text:['\n\n Responsable:                                       ',{
+                text:`${data.responsable || ''}`, bold:true, fontSize:10, alignment: 'center',
+              }]
+            },
+            {
+              fontSize:9,
+              bold: true,
+              color: '#000000',
+              text:['\nNo. Telefonico:                     ',{
+                text:`${data.telefono || ''}`, bold:true, fontSize:10, alignment: 'center',
+              }]
+            },
+            {
+              fontSize: 9,
+              color: '#054f95',
+              text:['\nPor concepto de  ',{
+                text:'    SERVICIO DE TRANSPORTE   ', bold:true, fontsize:10, color: '#000000'
+              },
+              '                    de el dia ',
+              {text:`                          ${data.fecha_salida || ''} `, bold:true, fontsize:10, color: '#000000'},
+              '            al                     ',
+              {text: ` ${data.fecha_regreso || ''}`, bold:true, fontsize:10, color: '#000000'},
+              ]
+            },
+            {
+              fontSize: 9,
+              color: '#054f95',
+              text:['\nLugar y Hora de Salida  ',{
+                text:`    ${data.salida || ``}    `, bold:true, fontsize:10, color: '#000000', alignment: 'center'
+              }]
+            },
+            {
+              fontSize: 9,
+              color: '#000000',
+              bold: true,
+              text:['\nRegreso:    ', {
+                text: `   ${data.regreso || ``}`, bold:true, fontsize:10, color: '#000000', alignment: 'center'
+              },
+              '',
+              {
+                text:'                   Destino                            ' , fontSize: 9, color: '#054f95',
+              },
+              '',
+              {
+                text:`  ${data.destino || ``}`, bold:true, fontsize:10, color: '#000000', alignment: 'center'
+              }]
+            },
+            {
+              fontSize: 9,
+              color: '#054f95',
+              text:['\nItinerario:   ',{
+                text: `${data.itinerario || ``}\n\n\n`, bold:true, fontsize:10, color: '#000000', alignment: 'center'
+              }]
+            },
+            {
+              columns: [
+                  {},
+                  {
+                    width: 200,
+                    fontSize:9,
+                    text: ['\n\nKm de salida:  ', {
+                        text: '__________________', bold:true, fontsize:10, color: '#1e85e7', alignment: 'center'
+                    },
+                    '\n\n\nTotal de Kilometros\n recorrios: ',
+                    {   text: '_______________________',color: '#1e85e7'},
+                    '\n\n\n Disiel: ',
+                    {   text: '___________________________', color: '#1e85e7'}
+                  ]},
+                  {
+                    width: 200,
+                    fontSize:9,
+                    text: ['\n\nKm de llegada: ',{
+                        text: `_______________________`, color: '#1e85e7'
+                    },
+                    '\n\n\n\nRendimiento: ',
+                    {text: '_________________________', color: '#1e85e7'}
+                  ]},
+              ],
+              columnGap: 20,
+            },
+            {
+              fontSize: 10,
+              color: '#000000',
+              alignment: 'center',
+              bold: true,
+              text: ['\n\n\nGastos:'],
+            },
+            {
+              fontSize: 9,
+              color: '#000000',
+              alignment: 'center',
+              text:['\nCasetas:   ',
+              {text:'______________________________     ', color: '#1e85e7'},
+              '  Comidas:   ',
+              {text:'______________________________     ', color: '#1e85e7'},
+              '  Total:   ',
+              {text:'______________________________   ', color: '#1e85e7'}
+              ]
+            },
+            {
+              fontSize: 9,
+              color: '#000000',
+              text:['\n\n\n\n\nOperador:   ',
+              {text:`${data.operador || ``}\n\n\n`, bold:true, fontsize:12, color: '#000000', alignment: 'center'}]
+            },
+            {
+              fontSize: 9,
+              color: '#000000',
+              alignment: 'center',
+              text:['\n\n\nOPERADOR                            ',
+              {text:'                                                                        RECIBI DE EMPRESA', alignment:'center', color: '#054f95'}]
+            },
+            {
+              color: '#1e85e7',
+              alignment: 'center',
+              text:['\n\n__________________________________                                  __________________________________']
+            }
+          ],
+          styles: {
+              header: {
+                  fontSize: 14,
+                  bold: true,
+                  margin: [0, 0, 0, 0]
+              },
+              table: {
+                  margin: [0, 0, 0, 0],
+                  fontSize: 11,
+                  border: [true,true,true,true]
+              },
+              normal: {
+                  fontSize: 11,
+                  color: 'black',
+                  alignment: 'justify'
+              }
+          },
+      }
+      var pdfDoc = printer.createPdfKitDocument(dd);
+      pdfDoc.pipe(res);
+    pdfDoc.end();
+  }
 }
