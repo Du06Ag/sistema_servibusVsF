@@ -8,6 +8,7 @@ html
     script(type="text/javascript" src="javascripts/materialize.js")
     script(type="text/javascript" src="javascripts/moments.js")
     script(src="/../javascripts/common.js")
+    script(src="javascripts/busqueda_Cotizaciones.js")
     link(rel="stylesheet" type="text/css" href="/../../stylesheets/default.css")
     
     link(rel="stylesheet" type="text/css" href="stylesheets/style.css")
@@ -62,7 +63,22 @@ html
         div(clas="container")
           div(class="row")
             div(class="col s12")
-              h4.center.bold Cotizaciones              
+              h4.center.bold Cotizaciones
+        div(class="row")
+          form(onsubmit="return buscarCotizacionRecep(this)")
+            div(class="col s12 m12 l2 offset-l3")
+              div(class="input-field")
+                select#busqueda(name="busqueda")
+                  option(value="Cliente") Cliente
+                  option(value="Destino") Destino
+                label(style="color:blue") Busqueda por:
+            div(class="col s12 m12 l4")
+              div(class="input-field")
+                input#autocomplete-input(required style="text-align:center" type="search" name="valor" placeholder="Ingrese el valor de busqueda....." class="autocomplete")
+                label.label-icon(for="search")
+                  i.material-icons.left search
+                i.material-icons close
+            button(type="submit" style="visibility:hidden;")              
             div(class="col s12 m10 l10 offset-l1")
               div(class="col s3 push-s9")
                 each pendiente in data.pendientes
