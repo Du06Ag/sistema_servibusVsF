@@ -6,6 +6,7 @@ html
     script(src="javascripts/jquery-3.1.1.js")
     script(src="javascripts/date.js")
     script(type="text/javascript" src="javascripts/materialize.js")
+    script(src="javascripts/busqueda_Agenda.js")
     
     link(rel="stylesheet" type="text/css" href="stylesheets/style.css")
     link(rel="stylesheet" type="text/css" href="stylesheets/materialize.css")
@@ -83,10 +84,18 @@ html
           div(class="row")
             div(class="col s12")
               h4.center.bold Agenda             
+          div(class="row")
+            form(onsubmit="return buscarServicio(this)")
+              div(class="col s12 m12 l6 offset-l3")
+                div(class="input-field")
+                  input#autocomplete-input(required style="text-align:center" type="search" name="valor" placeholder="Ingresa el nombre del cliente......" class="autocomplete")
+                  label.label-icon(for="search")
+                    i.material-icons.left search
+                  i.material-icons close
+                button(type="submit" style="visibility:hidden;")
+                br
             div(class="col s12 m10 l10 offset-l1")
-              div(class="col s3 push-s9")
-              br
-              br
+              
               table(class="highlight z-depth-3 centered responsive-table" id="myTable")
                 thead
                   tr

@@ -5,6 +5,7 @@ html
     
     script(src="javascripts/jquery-3.1.1.js")
     script(type="text/javascript" src="javascripts/materialize.js")
+    script(src="javascripts/busqueda_bitacoras.js")
     
     link(rel="stylesheet" type="text/css" href="stylesheets/style.css")
     link(rel="stylesheet" type="text/css" href="stylesheets/materialize.css")
@@ -81,9 +82,17 @@ html
         div(clas="container")
           div(class="row")
             div(class="col s12")
-              h4.center.bold Ordenes de servicio registradas            
+              h4.center.bold Ordenes de servicio registradas
+          div(class="row")
+            form(onsubmit="return buscarOrdenServicio(this)")
+              div(class="col s12 m12 l4 offset-l4")
+                div(class="input-field")
+                  input#autocomplete-input(required style="text-align:center" type="search" name="valor" placeholder="Ingresa folio de contrato......" class="autocomplete")
+                  label.label-icon(for="search")
+                    i.material-icons.left search
+                  i.material-icons close
+                button(type="submit" style="visibility:hidden;")            
             div(class="col s12 m10 l10 offset-l1")
-              
               br
               table(class="highlight z-depth-3 centered responsive-table")
                 thead
