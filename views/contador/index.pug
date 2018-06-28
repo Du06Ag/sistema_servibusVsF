@@ -5,6 +5,7 @@ html
     
     script(src="javascripts/jquery-3.1.1.js")
     script(type="text/javascript" src="javascripts/materialize.js")
+    script(type="text/javascript" src="javascripts/busqueda_reporte_rendimiento.js")
     
     link(rel="stylesheet" type="text/css" href="stylesheets/style.css")
     link(rel="stylesheet" type="text/css" href="stylesheets/materialize.css")
@@ -55,6 +56,29 @@ html
             div(class="col s12")
               h4.center.bold Reportes de Rendimineto y Control de Viajes
               br
+          div(class="row")
+            form(onsubmit="return buscarRepRendimiento(this)")
+              div(class="col s12 m12 l4 push-l1")
+                div(class="input-field")
+                  select#tipo(name="tipo")
+                    each tipo in data.tipos
+                      option(value=tipo.id_tipo_unidad)=tipo.modelo_unidad +' '+tipo.numero_plazas +' plazas'
+                  label(style="color:blue") Tipo de unidad
+              div(class="col s12 m12 l2 push-l1")
+                div(class="input-field")
+                  select#undiad_no(name="unidad")
+                    each unidades in data.unidad
+                      option(value=unidades.numero_economico)='Unidad No. '+unidades.numero_economico 
+                  label(style="color:blue") Unidad No.
+              div(class="col s12 m12 l3 push-l1")
+                div(class="input-field")
+                  i(class="material-icons prefix") date_range
+                  input(class="validate" type="text" class="datepicker" id="fecha" name="fecha" required)
+                  label(for="fecha_salida" style="color:blue") selecciona un mes           
+              div(class="col s12 m12 l1 push-l1")
+                div(class="input-field")
+                  button(class="btn waves-effect waves-light" type="submit")
+                    i(class="material-icons right") search
             //label(for="aDate" id="aDate" style="font-size: 20px; color: blue; text-bold; font-weight:bold" class="form-control col s3 push-s9")
             div(class="col s12")            
               table(class="highlight z-depth-3 centered responsive-table")
@@ -90,15 +114,21 @@ html
                 $(".dropdown-trigger").dropdown();
                 });
               })(jQuery);
-              $(document).ready(function(){
-                $('.datepicker').datepicker();
-              });
               $(document).ready(function() {
                 var now = moment();
                 $("#aDate").text(now.format("lll"));
               });
               $(document).ready(function(){
                 $('.modal').modal();
+              });
+              $(function(){
+              $("#fecha").datepicker({
+                    format: 'yyyy-m',
+            
+                });
+              });
+              $(document).ready(function(){
+                $('select').formSelect();
               });
             
               
