@@ -8,7 +8,7 @@ const express = require ('express'),
       path    = require('path'),
       bodyParser = require('body-parser'),
       methodOverride = require('method-override'),
-      session  = require('express-session');
+        session  = require('express-session');
 
 //config DATABASE
 const configDB = require('./config/database.js');
