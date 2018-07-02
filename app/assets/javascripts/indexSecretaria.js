@@ -55,7 +55,7 @@ function buscarCotizacion(form){
 					</div>
 					<div class="row">
 					  <div class="input-field col s10 push-s1 pull-s1">
-							<input id="adelanto" name="adelanto" type="text" class="validate color-text-blue" minlength="8" maxlength="95"></input>
+							<input id="adelanto" name="adelanto" type="text" class="validate color-text-blue" minlength="4" maxlength="95" require></input>
 							<label for="adelanto" style="color:blue"> Cantidad de adelanto </label>
 						</div>
 					</div>
