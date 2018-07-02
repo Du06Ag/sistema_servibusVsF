@@ -60,14 +60,14 @@ html
                     div(class="input-field col s12")
                       input(name="idpersona" id="idpersona" type="hidden" value=data.persona.id_persona)
                       input(name="estado" id="estado" type="hidden" value=data.persona.estatus)
-                      input(id="nombre" name="nombre" type="text" class="validate color-text-blue" value=data.persona.nombre pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" maxlenght="40" required)
+                      input(id="nombre" name="nombre" type="text" class="validate color-text-blue" value=data.persona.nombre pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" maxlenght="100" required)
                       label(for="nombre" style="color:blue") Nombre
                   div(class="row")
                     div(class="input-field col s6")
-                      input(type="text" class="validate" id="ap_paterno" name="ap_paterno" value=data.persona.ap_paterno pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" maxlenght="40" required)
+                      input(type="text" class="validate" id="ap_paterno" name="ap_paterno" value=data.persona.ap_paterno pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" maxlenght="100" required)
                       label(for="ap_paterno" style="color:blue") Apellido paterno
                     div(class="input-field col s6")
-                      input(id="ap_materno"  name="ap_materno" type="text" class="validate" value=data.persona.ap_materno pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" maxlenght="40" required)
+                      input(id="ap_materno"  name="ap_materno" type="text" class="validate" value=data.persona.ap_materno pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" maxlenght="100" required)
                       label(for="ap_materno" style="color:blue") Apellido materno
                   div(class="row")
                     div(class="input-field col s6 ")
