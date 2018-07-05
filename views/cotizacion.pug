@@ -4,35 +4,40 @@ html
       
     title ServiBus Website
     
-    
-    //-script(type="text/javascript" src="javascripts/materialize.js")
-    
-    //-script(type="text/javascript" src="../../javascripts/picker.js" )
-    //-script(type="text/javascript" src="../../javascripts/picker.date.js")
+  
     script(src="/../javascripts/index_recepcionista.js")
-    script(src="/../javascripts/common.js")
+    //-script(src="/../javascripts/common.js")
     //- stylessheets de terceros
-    link(rel="stylesheet" type="text/css" href="/../stylesheets/common.css")
-    link(rel="stylesheet" type="text/css" href="stylesheets/style.css")
+    //-link(rel="stylesheet" type="text/css" href="/../stylesheets/common.css")
+    //-link(rel="stylesheet" type="text/css" href="stylesheets/style.css")
     link(rel="stylesheet" type="text/css" href="stylesheets/materialize.css")
-    link(rel="stylesheet" type="text/css" href="fonts/iconfont/material-icons.css")
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
     link(href="/../images/fav.ico/favicon.ico" rel="icon" type="image/ico")
     meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
     
-  body
-    header 
-      .container
-        #branding
-          img(src="images/mapa.png")
-        nav(class="white z-depth-0") 
-          ul(id="nav-mobile" class="right hide-on-med-and-down")
-            li.current
-              a(href="/") Inicio
-            li.current
-              a(href="/cotizacion") Cotizaciones
-            li.current
-              a(href="/login") Iniciar Sesion
-        h4 ServiBus Servicios Turisticos Terrestres
+  body(id="inicio" class="scrollspy")
+    div(class="navbar-fixed")
+      nav(style="background: #FFFFFF; border-bottom: #30B315 3px solid;")
+        div(class="container")
+          div(class="nav-wrapper")
+            img(src="images/mapa.png" style="height:50px; margin-top:5px;" class="responsive-img")
+            a(href="#" class="brand-logo hide-on-small-only" style="color:#30B315;font-size: 25;word-spacing: 25pt") . ServiBus
+            a(href="#" data-target="mobile-nav" class="sidenav-trigger" style="color:#087edb")
+              i(class="material-icons") menu  
+            ul(class="right hide-on-med-and-down")
+              li
+                a(href="/" style="color:#30B315") Inicio
+              li
+                a(href="/cotizacion" style="color:#30B315") Cotizaciones
+              li
+                a(href="/login" style="color:#30B315") Iniciar Sesion
+    ul(class="sidenav" id="mobile-nav")
+      li
+        a(href="/" style="color:#30B315") Inicio
+      li
+        a(href="/cotizacion" style="color:#30B315") Cotizaciones
+      li
+        a(href="/login" style="color:#30B315") Iniciar Sesion
     br
     div(class="row padding-top padding-bottom")
       div(class="z-depth-4 col s6 push-s3")
@@ -56,14 +61,14 @@ html
               div(id="datos_persona")
                 div(class="row")
                   div(class="input-field col s12")
-                    input(id="nombre" name="nombre" type="text" class="validate color-text-blue" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="3" maxlength="100")
+                    input(id="nombre" name="nombre" type="text" class="validate color-text-blue" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="3" maxlength="20")
                     label(for="nombre" style="color:blue") Nombre
                 div(class="row")
                   div(class="input-field col s6")
-                    input(type="text" class="validate" id="ap_paterno" name="ap_paterno" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="3" maxlength="100" )
+                    input(type="text" class="validate" id="ap_paterno" name="ap_paterno" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="3" maxlength="20" )
                     label(for="ap_paterno" style="color:blue") Apellido paterno
                   div(class="input-field col s6")
-                    input(id="ap_materno" name="ap_materno" type="text" class="validate" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="3" maxlength="100" )
+                    input(id="ap_materno" name="ap_materno" type="text" class="validate" pattern="^([A-Za-zÁÉÍÓÚ]{1}[A-Za-zñáéíóú]+[\\s]*)+$" minlength="3" maxlength="20" )
                     label(for="ap_materno" style="color:blue") Apellido materno
                 div(class="row")
                   div(class="input-field col s6 ")
@@ -102,19 +107,19 @@ html
                   label(for="lugar_destino" style="color:blue") Lugar de destino
               div(class="row")
                 div(class="input-field col s3")
-                  i(class="material-icons prefix") date_range
+                  i(class="material-icons prefix hide-on-small-only") date_range
                   input(class="validate" type="text" class="datepicker" id="fecha_salida" name="fecha_salida" required)
                   label(for="fecha_salida" style="color:blue") Fecha salida
                 div(class="input-field col s3")
-                  i(class="material-icons prefix") access_time
+                  i(class="material-icons prefix hide-on-small-only") access_time
                   input(class="validate" type="text" class="timepicker" id="hora_salida" name="hora_salida" required)
                   label(for="hora_salida" style="color:blue") Hora salida
                 div(class="input-field col s3")
-                  i(class="material-icons prefix") date_range
+                  i(class="material-icons prefix hide-on-small-only") date_range
                   input(class="validate" type="text" class="datepicker" id="fecha_regreso" name="fecha_regreso" required)
                   label(for="fecha_regreso" style="color:blue; font-size:14px") Fecha regreso
                 div(class="input-field col s3")
-                  i(class="material-icons prefix ") access_time
+                  i(class="material-icons prefix hide-on-small-only") access_time
                   input(class="validate" type="text" class="timepicker" id="hora_regreso" name="hora_regreso" required)
                   label(for="hora_regreso" style="color:blue") Hora regreso
               div(class="row")
@@ -133,7 +138,9 @@ html
                 div(class="col s12")
                   button(class="btn waves-effect waves-light col s6 push-s3 pull-s3" type="submit" name="cotizar") Enviar
                     i(class="material-icons right") send
-    
+    //- Footer 
+    footer(class="section white-text center" style="background:#30B315")
+      p(class="flow-text") ServiBus Website, Copyright &copy; 2018
     div(id="seleccionar_email" class="modal modal-fixed-footer")
       div(class="modal-content")
         h4 Buscar correo electronico
@@ -151,6 +158,8 @@ html
     script(type="text/javascript" src="javascripts/jquery-3.1.1.js")
     script(type="text/javascript" src="javascripts/materialize.js")
     script.
+           const sideNav = document.querySelector('.sidenav');
+           M.Sidenav.init(sideNav, {});
            var fecha = new Date();
            $(function(){
              $("#fecha_salida").datepicker({
@@ -180,5 +189,3 @@ html
            });
            
                                           
-    footer
-      p ServiBus Website, Copyright &copy; 2018

@@ -1,53 +1,252 @@
 doctype html
 html
   head
-      
-    title ServiBus Website
-    
-    //-script(src="javascripts/jquery-3.1.1.js")
-       script(type="text/javascript" src="javascripts/materialize.js")
-    
-    link(rel="stylesheet" type="text/css" href="stylesheets/style.css")
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
     link(rel="stylesheet" type="text/css" href="stylesheets/materialize.css")
-    link(rel="stylesheet" type="text/css" href="fonts/iconfont/material-icons.css")
-    link(href="/../images/fav.ico/favicon.ico" rel="icon" type="image/ico")
-    meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
-  
-  body
-    header 
-      .container
-        #branding
-          img(src="images/mapa.png")
-        nav(class="white z-depth-0") 
-          ul(id="nav-mobile" class="right hide-on-med-and-down")
-            li.current
-              a(href="/") Inicio
-            li.current
-              a(href="/cotizacion") Cotizaciones
-            li.current
-              a(href="/login") Iniciar Sesion
-        h4 ServiBus Servicios Turisticos Terrestres
-    section#showcase
-      .container
-        h1 "Brindamos el mejor servicio de transportacion turistica"
-        p Somos la nueva nueva opcion de transporte en Guerrero.
-        
-    section#newsletter
-      .container
-        
-    section#boxes
-      .container
-        .box
-          img(src="images/camioneta.jpg")
-          h3 Camioneta Sprinter
-          p  Numero de plazas 20.
-        .box
-          img(src="images/media.jpg")
-          h3 Autobuses Gama media
-          p Autobus marca Irizar, numero de plazas 47.
-        .box
-          img(src="images/primera.jpg")
-          h3 Autobuses de primera PB
-          p Autobus maraca Iriza, modelo 2017, numero de plazas 47.
-    footer
-      p ServiBus Website, Copyright &copy; 2018
+    //-link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css")
+    link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous")
+    
+    title ServiBus WebSite
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    
+    style.
+      .section-follow .fa-4x {
+        margin: 5px 10px;
+      }   
+  body(id="inicio" class="scrollspy")
+    //-NavBar
+    
+    div(class="navbar-fixed")
+      nav(style="background: #FFFFFF; border-bottom: #30B315 3px solid;")
+        div(class="container")
+          div(class="nav-wrapper")
+            img(src="images/mapa.png" style="height:50px; margin-top:5px;" class="responsive-img")
+            a(href="#" class="brand-logo hide-on-small-only" style="color:#30B315;font-size: 25;word-spacing: 25pt") . ServiBus
+            a(href="#" data-target="mobile-nav" class="sidenav-trigger" style="color:#087edb")
+              i(class="material-icons") menu  
+            ul(class="right hide-on-med-and-down")
+              li
+                a(href="#inicio" style="color:#30B315") Inicio
+              li
+                a(href="#autobuses" style="color:#30B315") Autobuses
+              li
+                a(href="/cotizacion" style="color:#30B315") Cotizaciones
+              li
+                a(href="#galeria" style="color:#30B315") Galeria
+              li
+                a(href="#contactanos" style="color:#30B315") Contactanos
+              li
+                a(href="/login" style="color:#30B315") Iniciar Sesion
+    ul(class="sidenav" id="mobile-nav")
+      li
+        a(href="#inicio" style="color:#30B315") Inicio
+      li
+        a(href="#autobuses" style="color:#30B315") Autobuses
+      li
+        a(href="/cotizacion" style="color:#30B315") Cotizaciones
+      li
+        a(href="#galeria" style="color:#30B315") Galeria
+      li
+        a(href="#contactanos" style="color:#30B315") Contactanos
+      li
+        a(href="/login" style="color:#30B315") Iniciar Sesion 
+      
+    //- Seccion: Slider
+    section(class="slider")
+      ul(class="slides")
+        li
+          img(src="images/slide-1.jpg" )
+          div(class="caption center-align")
+            h3(style="color:#fefcfc") "Somos su mejor opción de transporte en Guerrero"
+            h4(class="light grey-text text-lighten-3 hide-on-small-only") Brindamos el mejor servicio de transportacion turistica
+        li
+          img(src="images/slide-2.jpg" )
+          div(class="caption center-align")
+            h3(style="color:#fefcfc") "Somos su mejor opción de transporte en Guerrero"
+            h4(class="light grey-text text-lighten-3 hide-on-small-only") Brindamos el mejor servicio de transportacion turistica
+        li
+          img(src="images/slide-3.jpg" )
+          div(class="caption center-align")
+            h3(style="color:#fefcfc") "Somos su mejor opción de transporte en Guerrero"
+            h4(class="light grey-text text-lighten-3 hide-on-small-only") Brindamos el mejor servicio de transportacion turistica
+      
+    //-Autobuses
+    section(id="autobuses" class="section section-autobuses scrollspy")
+      div(class="container")
+        div(class="row")
+          h4(class="center") Tenemos una amplia gama de  
+            span(style="color:#30B315") Autobuses
+          div(class="col s12 m6")
+            div(class="card")
+              div(class="carousel carousel-slider center")
+                div(class="carousel-item" href="#one!")
+                  img(src="images/sprinter-1.jpg")
+                div(class="carousel-item" href="#one!")
+                  img(src="images/sprinter-2.jpg")
+                div(class="carousel-item" href="#one!")
+                  img(src="images/sprinter3.jpg")
+              div(class="card-content")
+                h5 SPRINTER
+                p * Seguro de viajero 
+                p * Aire acondicionado 
+                p * Cinturones de seguridad
+                p Nuestros minibuses cuentan con los servicios mas modernos del mercado, disenados para disfrutar la mejor experiencia de viaje y se adecua a sus necesidades, gusto y presupuesto 
+          
+          div(class="col s12 m6")
+            div(class="card")
+              div(class="carousel carousel-slider center")
+                div(class="carousel-item" href="#one!")
+                  img(src="images/media-3.jpg" style="height: 253px")
+                div(class="carousel-item" href="#one!")
+                  img(src="images/media-2.jpg" style="height: 253px")
+                div(class="carousel-item" href="#one!")
+                  img(src="images/media-1.jpg" style="height: 253px")
+              div(class="card-content")
+                h5 IRIZAR CENTURY
+                p * 45-47 plazas
+                p * Asientos tipo reposet
+                p * Aire acondicionado 
+                p * Reproductor de DVD, CD Y MP3
+                P * Pantallas, Micrófono, Ventanas panoramicas, Seguro de viajero, WC.
+        div(class="row")
+          div(class="col s12 m6")
+            div(class="card")
+              div(class="carousel carousel-slider center")
+                div(class="carousel-item" href="#one!")
+                  img(src="images/pb-6.jpg")
+                div(class="carousel-item" href="#one!")
+                  img(src="images/pb-4.jpg")
+                div(class="carousel-item" href="#one!")
+                  img(src="images/pb-3.jpg")
+                div(class="carousel-item" href="#one!")
+                  img(src="images/pb-2.jpg")
+                div(class="carousel-item" href="#one!")
+                  img(src="images/pb-1.jpg")
+              div(class="card-content")
+                h5 IRIZAR PB
+                p Scania Irizar PB  es una obra de arte; una belleza funcional, diseñada y equipada para que su viaje se convierta en algo satisfactorio, dia tras día. 
+                p * 47 plazas 
+                p * 2 puestas de acceso
+                p * Aire acondicionado
+                p * Asientos tipo reposet
+                p * Reproductor de DVD, CD Y MP3
+                p * Conexiones eléctricas para dispositivos móviles 
+                P * Pantallas, Micrófono, Ventanas panoramicas, Seguro de viajero, WC
+                
+          div(class="col s12 m6")
+            div(class="card")
+              div(class="carousel carousel-slider center")
+                div(class="carousel-item" href="#one!")
+                  img(src="images/i8-1.jpg" style="height: 253px")
+                div(class="carousel-item" href="#one!")
+                  img(src="images/i8-3.jpg" style="height: 253px")
+                div(class="carousel-item" href="#one!")
+                  img(src="images/i8-2.jpg" style="height: 253px")
+              div(class="card-content")
+                h5 IRIZAR I8
+                p Scania Irizar i8 es una obra de arte; una belleza funcional, diseñada y equipada para que su viaje se convierta en algo satisfactorio, dia tras día. 
+                p * 47 plazas 
+                p * 2 puestas de acceso
+                p * Aire acondicionado
+                p * Asientos tipo reposet
+                p * Reproductor de DVD, CD Y MP3
+                p * Conexiones eléctricas para dispositivos móviles 
+                P * Pantallas, Micrófono, Ventanas panoramicas, Seguro de viajero, WC
+    //-Redes sociales
+    section(class="section section-follow center white-text" style="background: #30B315;color:#38d743")
+      div(class="container")
+        div(class="row")
+          div(class="col s12")
+            h4 Siguenos en nuestras redes sociales
+            a(href="https://www.facebook.com/ServiBus-Servicios-Tur%C3%ADsticos-Terrestres-988980281130691/" class="white-text")
+              i(class="fab fa-facebook fa-4x")
+            a(href="https://www.facebook.com/ServiBus-Servicios-Tur%C3%ADsticos-Terrestres-988980281130691/" class="white-text")
+              i(class="fab fa-twitter fa-4x")
+            a(href="https://www.facebook.com/ServiBus-Servicios-Tur%C3%ADsticos-Terrestres-988980281130691/" class="white-text")
+              i(class="fab fa-instagram fa-4x")
+    
+    //-Galeria de fotos
+    section(id="galeria" class="section section-gallery scrollspy")
+      div(class="container")
+        h4(class="center") Galeria de 
+          span(style="color:#30B315") fotos
+        div(class="row")
+          div(class="col s12 m3")
+            img(src="images/img1.jpg" style="height:120px;width:250px" class="materialboxed responsive-img")
+          div(class="col s12 m3")
+            img(src="images/img2.jpg" style="height:120px;width:250px" class="materialboxed responsive-img")
+          div(class="col s12 m3")
+            img(src="images/img3.jpg" style="height:120px;width:250px" class="materialboxed responsive-img")
+          div(class="col s12 m3")
+            img(src="images/img4.jpg" style="height:120px;width:250px" class="materialboxed responsive-img")
+        div(class="row")
+          div(class="col s12 m3")
+            img(src="images/img5.jpg" style="height:120px;width:250px" class="materialboxed responsive-img")
+          div(class="col s12 m3")
+            img(src="images/img6.jpg" style="height:120px;width:250px" class="materialboxed responsive-img")
+          div(class="col s12 m3")
+            img(src="images/img7.jpg" style="height:120px;width:250px" class="materialboxed responsive-img")
+          div(class="col s12 m3")
+            img(src="images/img8.jpg" style="height:120px;width:250px" class="materialboxed responsive-img")
+        div(class="row")
+          div(class="col s12 m3")
+            img(src="images/img9.jpg" style="height:120px;width:250px" class="materialboxed responsive-img")
+          div(class="col s12 m3")
+            img(src="images/img10.jpg" style="height:120px;width:250px" class="materialboxed responsive-img")
+          div(class="col s12 m3")
+            img(src="images/img11.jpg" style="height:120px;width:250px" class="materialboxed responsive-img")
+          div(class="col s12 m3")
+            img(src="images/img12.jpg" style="height:120px;width:250px" class="materialboxed responsive-img")
+                  
+    //-Seccion de contacto
+    section(id="contactanos" class="section section-contac scrollspy")
+      div(class="container")
+        div(class="row")
+          div(class="col s12 m6")
+            div(class="card-panel white-text center" style="background:#30B315")
+              i(class="material-icons") email
+              h5 Contáctenos:
+              p Para mayor información acerca de nuestros servicios y promociones..
+            ul(class="collection with-header")
+              li(class="collection-item") Direccion : Paseo Alejandro Cervantes s un costado de las escaleras del "Mercado Benito Juárez"
+              li(class="collection-item") Chilpancingo, Gro.
+              li(class="collection-item") Tel: (747) 47 2 00 51
+              li(class="collection-item") Cel: 7471066876
+              li(class="collection-item") E-mail: servibus2010@hotmail.com      
+          
+          div(class="col s12 m6")
+            h4(class="center")
+              span(style="background:#30B315;color: white") Visita Nuestras Oficinas
+            div(class="card-panel")
+              img(class="materialboxed" width="400" src="images/oficina.jpg" class="responsive-img")    
+    
+    //- Footer 
+    footer(class="section white-text center" style="background:#30B315")
+      p(class="flow-text") ServiBus Website, Copyright &copy; 2018
+      
+    script(type="text/javascript" src="javascripts/materialize.js")
+    //-script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js")
+    script.
+          const sideNav = document.querySelector('.sidenav');
+          M.Sidenav.init(sideNav, {});
+          const slider = document.querySelectorAll('.slider');
+          M.Slider.init(slider, {
+            indicators: false,
+            height: 500,
+            transition: 500,
+            interval: 6000
+          });
+          const mb = document.querySelectorAll('.materialboxed');
+          M.Materialbox.init(mb,{});
+          const ss = document.querySelectorAll('.scrollspy');
+          M.ScrollSpy.init(ss, {});
+          document.addEventListener('DOMContentLoaded', function(){
+            var elems = document.querySelectorAll('.carousel');
+            var instances = M.Carousel.init(elems,{
+              fullWidth: true,
+              indicators: true
+            });
+          });
+            
+    
+    
